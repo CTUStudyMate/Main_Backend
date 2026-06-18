@@ -1,0 +1,59 @@
+# ========== Visual Studio ==========
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# ========== Build results ==========
+bin/
+obj/
+[Bb]uild/
+[Dd]ebug*/
+[Rr]elease*/
+x64/
+x86/
+[Aa]rm/
+
+# ========== .NET ==========
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# NuGet packages
+*.nupkg
+*.snupkg
+**/packages/*
+!**/packages/build/
+
+# NuGet config
+.nuget/
+
+# ========== ASP.NET Core ==========
+appsettings.Development.json
+appsettings.*.local.json
+wwwroot/lib/
+
+# Logs
+*.log
+
+# ========== User-specific files ==========
+*.db
+*.sqlite
+*.sqlite3
+
+# ========== Rider / JetBrains ==========
+.idea/
+*.sln.iml
+
+# ========== VS Code ==========
+.vscode/
+
+# ========== OS ==========
+.DS_Store
+Thumbs.db
+
+# ========== Secret / environment ==========
+.env
+.env.*
+secrets.json
