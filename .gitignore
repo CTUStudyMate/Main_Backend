@@ -55,5 +55,4 @@ Thumbs.db
 
 # ========== Secret / environment ==========
 .env
-.env.*
 secrets.json
