@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using MainBackend.Models;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -56,6 +58,7 @@ namespace MainBackend.Migrations
                 {
                     MessageId = table.Column<Guid>(type: "uuid", nullable: false),
                     Content = table.Column<string>(type: "text", nullable: false),
+                    MessageSegments = table.Column<List<RagSegment>>(type: "jsonb", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     SenderType = table.Column<string>(type: "text", nullable: false),
                     ChatId = table.Column<Guid>(type: "uuid", nullable: false),
