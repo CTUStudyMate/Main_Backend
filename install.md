@@ -7,6 +7,7 @@ dotnet add package Serilog.AspNetCore
 dotnet add package Swashbuckle.AspNetCore --version 6.6.2
 dotnet add package DotNetEnv
 dotnet add package Microsoft.AspNetCore.Identity
+dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer
 
 # 2. restore project
 dotnet restore
