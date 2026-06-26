@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using MainBackend.Services;
 using MainBackend.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 namespace MainBackend.Controllers;
 
 [ApiController]
@@ -14,11 +16,16 @@ public class ChatController : ControllerBase
         _chatService = chatService;
     }
 
+    [Authorize]
     [HttpPost]
-    public async Task<IActionResult> CreateChat(CreateChatRequest request)
+    public async Task<IActionResult> CreateChat([FromQuery] CreateChatRequest request)
     {
+        var userId = int.Parse(
+            User.FindFirst(ClaimTypes.NameIdentifier)?.Value
+            ?? throw new UnauthorizedAccessException("Missing user id claim")
+        );
         var chat = await _chatService.CreateChatAsync(
-            request.UserId,
+            userId,
             request.Title
         );
 
@@ -29,4 +36,23 @@ public class ChatController : ControllerBase
             CreatedAt = chat.CreatedAt
         });
     }
+
+    [Authorize]
+    [HttpGet]
+    public async Task<IActionResult> GetChats([FromQuery] GetChatsRequest request)
+    {
+
+        var userId = int.Parse(
+            User.FindFirst(ClaimTypes.NameIdentifier)?.Value
+            ?? throw new UnauthorizedAccessException("Missing user id claim")
+        );
+
+        var getChatsResult = await _chatService.GetChatsByUserId(
+            userId,
+            request
+        );
+
+        return Ok(getChatsResult);
+    }
+
 }

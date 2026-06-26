@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MainBackend.Services;
 using MainBackend.Models;
-
+using MainBackend.Configurations;
 namespace MainBackend.Controllers;
 
 [ApiController]
@@ -25,14 +25,29 @@ public class AuthController : ControllerBase
 
         var token = _jwtService.GenerateToken(user);
 
-        Response.Cookies.Append("access_token", token, new CookieOptions
-        {
-            HttpOnly = true,
-            Secure = true,
-            SameSite = SameSiteMode.None,
-            Expires = DateTime.UtcNow.AddHours(2)
-        });
+        Response.Cookies.Append("access_token", token, CookieOptionsFactory.CreateAuthCookie());
 
         return Ok(user);
+    }
+
+    [HttpPost("register")]
+    public async Task<IActionResult> Register([FromBody] RegisterRequest request)
+    {
+        var registerResult = await _authService.Register(request);
+
+        if (registerResult.Auth == null)
+        {
+            return Conflict(registerResult.Response);
+        }
+
+        var token = _jwtService.GenerateToken(registerResult.Auth);
+
+        Response.Cookies.Append(
+            "access_token",
+            token,
+            CookieOptionsFactory.CreateAuthCookie()
+        );
+
+        return Ok(registerResult.Response);
     }
 }

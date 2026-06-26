@@ -76,7 +76,7 @@ public class MessageService
             CreatedAt = DateTime.UtcNow,
             UserId = userId,
             ChatId = chatId,
-            MessageSegments = new List<RagSegment>{}
+            MessageSegments = new List<RagSegment> { } // user_segments is an empty list. Only AI needs segments
         };
 
         await _context.Messages.AddAsync(UserMessage);
@@ -93,6 +93,8 @@ public class MessageService
         };
 
         await _context.Messages.AddAsync(AIMessage);
+        currentChat.LastMessageAt = DateTime.UtcNow;
+        
         await _context.SaveChangesAsync();
 
         return AIMessage;
