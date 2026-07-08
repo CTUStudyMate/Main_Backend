@@ -98,4 +98,22 @@ public class AuthService : IAuthService
             }
         };
     }
+
+    public async Task<AuthResult?> GetMe(int userId)
+    {
+        var user = await _db.Users.FindAsync(userId);
+
+        if (user == null)
+            throw new KeyNotFoundException($"User with id {userId} not found.");
+
+        return new AuthResult
+        {
+            UserId = user.UserId,
+            Email = user.Email,
+            Role = user.Role,
+            Name = user.Name,
+            AccountStatus = user.AccountStatus,
+            Username = user.Username
+        };
+    }
 }

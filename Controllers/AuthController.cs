@@ -2,6 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using MainBackend.Services;
 using MainBackend.Models;
 using MainBackend.Configurations;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+
 namespace MainBackend.Controllers;
 
 [ApiController]
@@ -49,5 +52,16 @@ public class AuthController : ControllerBase
         );
 
         return Ok(registerResult.Response);
+    }
+
+    [Authorize]
+    [HttpGet("me")]
+    public async Task<IActionResult> Me()
+    {
+        var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
+
+        var userResult = await _authService.GetMe(userId);
+
+        return Ok(userResult);
     }
 }

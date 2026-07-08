@@ -101,4 +101,10 @@ public class ChatService
         };
     }
 
+    public async Task<Chat?> GetChatByIdAsync(int userId, Guid chatId)
+    {
+        return await _context.Chats
+            .FirstOrDefaultAsync(c => c.ChatId == chatId && c.UserId == userId);
+    }
+
 }

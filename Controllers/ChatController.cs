@@ -55,4 +55,28 @@ public class ChatController : ControllerBase
         return Ok(getChatsResult);
     }
 
+    [Authorize]
+    [HttpGet("{chatId}")]
+    public async Task<IActionResult> GetChatById([FromRoute] Guid chatId)
+    {
+        var userId = int.Parse(
+            User.FindFirst(ClaimTypes.NameIdentifier)?.Value
+            ?? throw new UnauthorizedAccessException("Missing user id claim")
+        );
+
+        var chat = await _chatService.GetChatByIdAsync(userId, chatId);
+
+        if (chat == null)
+        {
+            return NotFound(new { message = "Chat not found" });
+        }
+
+        return Ok(new ChatResponse
+        {
+            ChatId = chat.ChatId,
+            ChatTitle = chat.ChatTitle,
+            CreatedAt = chat.CreatedAt
+        });
+    }
+
 }

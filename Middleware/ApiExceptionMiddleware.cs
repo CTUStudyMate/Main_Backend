@@ -30,6 +30,16 @@ public class ExceptionMiddleware
         }
     }
 
+    private static string GetErrorCode(Exception ex)
+    {
+        return ex switch
+        {
+            KeyNotFoundException => "NOT_FOUND",
+            ArgumentException => "BAD_REQUEST",
+            RagException => "RAG_ERROR",
+            _ => "INTERNAL_ERROR"
+        };
+    }
     private static Task HandleExceptionAsync(HttpContext context, Exception ex)
     {
         context.Response.ContentType = "application/json";
@@ -44,10 +54,16 @@ public class ExceptionMiddleware
 
         context.Response.StatusCode = statusCode;
 
-        var response = new
+        var response = new  
         {
-            error = ex.Message,
-            status = statusCode
+            success = false,
+            error = new
+            {
+                message = ex.Message,
+                type = ex.GetType().Name,
+                code = GetErrorCode(ex),
+                status = statusCode
+            }
         };
 
         return context.Response.WriteAsJsonAsync(response);
