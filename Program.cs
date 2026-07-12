@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Pgvector.EntityFrameworkCore;
 
 
 namespace MainBackend;
@@ -55,6 +56,7 @@ public class Program
         );
 
         dataSourceBuilder.EnableDynamicJson();
+        dataSourceBuilder.UseVector();
 
         var dataSource = dataSourceBuilder.Build();
         // builder.Services.AddDbContext<AppDbContext>(options =>
@@ -64,7 +66,7 @@ public class Program
         // );
         builder.Services.AddDbContext<AppDbContext>(options =>
         {
-            options.UseNpgsql(dataSource);
+            options.UseNpgsql(dataSource, o => o.UseVector());
         });
 
         // 🔹 Services

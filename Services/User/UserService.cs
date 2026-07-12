@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using MainBackend.Models;
 
 namespace MainBackend.Services;
+
 public class UserService
 {
     private readonly AppDbContext _context;
@@ -13,13 +14,18 @@ public class UserService
     }
     public async Task<User> CreateUserAsync(CreateUserRequest userRequestInfo)
     {
+        if (!Enum.TryParse<UserRole>(userRequestInfo.Role, true, out var role))
+        {
+            throw new ArgumentException("Invalid role.");
+        }
+
         var user = new User
         {
             Username = userRequestInfo.Username,
             Password = "",
             Email = userRequestInfo.Email,
             Name = userRequestInfo.Name,
-            Role = userRequestInfo.Role,
+            Role = role,
             AccountStatus = "active"
         };
 

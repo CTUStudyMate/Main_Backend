@@ -3,6 +3,7 @@ using MainBackend.Services;
 using MainBackend.Models;
 using Microsoft.AspNetCore.Authorization;
 namespace MainBackend.Controllers;
+
 using System.Security.Claims;
 
 [ApiController]
@@ -23,16 +24,16 @@ public class MessageController : ControllerBase
             User.FindFirst(ClaimTypes.NameIdentifier)?.Value
             ?? throw new UnauthorizedAccessException("Missing user id")
         );
-        
-        var aiMessage = await _messageService.RespondQueryAsync(request, userId);
 
+        var aiMessage = await _messageService.RespondQueryAsync(request, userId);
+    
         return Ok(new MessageToFrontend
         {
             MessageId = aiMessage.MessageId,
             ChatId = aiMessage.ChatId,
             Content = aiMessage.Content,
-            CreatedAt = aiMessage.CreatedAt,
-            SenderType = aiMessage.SenderType,
+            CreatedAt = aiMessage.CreatedAt ?? DateTime.UtcNow,
+            SenderType = aiMessage.SenderType.ToString().ToLower(),
             MessageSegments = aiMessage.MessageSegments
         });
     }

@@ -43,7 +43,7 @@ public class MessageService
         var ragMessages = messages.Select(m => new MessageToRag
         {
             Content = m.Content,
-            SenderType = m.SenderType,
+            SenderType = m.SenderType.ToString().ToLower(),
             MessageId = m.MessageId
         }).ToList();
 
@@ -73,7 +73,7 @@ public class MessageService
         {
             MessageId = request.MessageId,
             Content = request.Content,
-            SenderType = "user",
+            SenderType = MessageSenderType.User,
             CreatedAt = DateTime.UtcNow, 
             UserId = userId,
             ChatId = request.ChatId,
@@ -87,7 +87,7 @@ public class MessageService
             MessageId = Guid.NewGuid(),
             Content = result.Content,
             MessageSegments = result.Segments,
-            SenderType = "assistant",
+            SenderType = MessageSenderType.Assistant,
             CreatedAt = DateTime.UtcNow,
             ChatId = request.ChatId,
             UserId = userId
@@ -119,8 +119,8 @@ public class MessageService
                     MessageId = m.MessageId,
                     Content = m.Content,
                     MessageSegments = m.MessageSegments,
-                    CreatedAt = m.CreatedAt,
-                    SenderType = m.SenderType,
+                    CreatedAt = m.CreatedAt?? DateTime.UtcNow,
+                    SenderType = m.SenderType.ToString().ToLower(),
                     ChatId = m.ChatId
                 })
                 .ToListAsync();

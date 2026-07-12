@@ -33,7 +33,7 @@ public class AuthService : IAuthService
         return new AuthResult
         {
             Email = user.Email,
-            Role = user.Role,
+            Role = user.Role.ToString().ToLower(),
             Name = user.Name,
             UserId = user.UserId,
             Username = user.Username,
@@ -63,7 +63,7 @@ public class AuthService : IAuthService
             Password = "",
             Email = request.Email,
             Name = request.Name,
-            Role = "student",
+            Role = UserRole.Student,
             AccountStatus = "active"
         };
 
@@ -82,7 +82,7 @@ public class AuthService : IAuthService
                     Username = insertUser.Username,
                     Name = insertUser.Name,
                     Email = insertUser.Email,
-                    Role = insertUser.Role,
+                    Role = insertUser.Role.ToString().ToLower(),
                     AccountStatus = insertUser.AccountStatus
                 }
             },
@@ -93,7 +93,7 @@ public class AuthService : IAuthService
                 Username = insertUser.Username,
                 Name = insertUser.Name,
                 Email = insertUser.Email,
-                Role = insertUser.Role,
+                Role = insertUser.Role.ToString().ToLower(),
                 AccountStatus = insertUser.AccountStatus
             }
         };
@@ -110,7 +110,7 @@ public class AuthService : IAuthService
         {
             UserId = user.UserId,
             Email = user.Email,
-            Role = user.Role,
+            Role = user.Role.ToString().ToLower(),
             Name = user.Name,
             AccountStatus = user.AccountStatus,
             Username = user.Username
