@@ -64,7 +64,9 @@ public class AuthService : IAuthService
             Email = request.Email,
             Name = request.Name,
             Role = UserRole.Student,
-            AccountStatus = "active"
+            AccountStatus = "active",
+            Cohort = request.Cohort,
+            MajorId = request.MajorId
         };
 
         insertUser.Password = _passwordHasher.HashPassword(insertUser, request.Password);

@@ -54,6 +54,14 @@ public class AuthController : ControllerBase
         return Ok(registerResult.Response);
     }
 
+    [HttpPost("logout")]
+    public IActionResult Logout()
+    {
+        Response.Cookies.Delete("access_token", CookieOptionsFactory.CreateAuthCookie());
+
+        return NoContent();
+    }
+
     [Authorize]
     [HttpGet("me")]
     public async Task<IActionResult> Me()

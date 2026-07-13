@@ -6,7 +6,6 @@ using MainBackend.Configurations;
 using Microsoft.Extensions.Options;
 using MainBackend.Common.Exceptions;
 
-
 namespace MainBackend.Services;
 
 public class MessageService
@@ -62,19 +61,28 @@ public class MessageService
             throw new RagException("RAG engine failed");
         }
 
-        var result = await response.Content.ReadFromJsonAsync<RagResponse>();
+        RagResponse? result = null;
+
+        try
+        {
+            result = await response.Content.ReadFromJsonAsync<RagResponse>();
+        }
+        catch (JsonException ex)
+        {
+            throw new RagException(ex.Message);
+        }
 
         if (result == null)
         {
             throw new RagException("RAG returned null body");
         }
-
+        var now = DateTime.UtcNow;
         var UserMessage = new Message
         {
             MessageId = request.MessageId,
             Content = request.Content,
             SenderType = MessageSenderType.User,
-            CreatedAt = DateTime.UtcNow, 
+            CreatedAt = now,
             UserId = userId,
             ChatId = request.ChatId,
             MessageSegments = new List<RagSegment> { } // user_segments is an empty list. Only AI needs segments
@@ -88,18 +96,39 @@ public class MessageService
             Content = result.Content,
             MessageSegments = result.Segments,
             SenderType = MessageSenderType.Assistant,
-            CreatedAt = DateTime.UtcNow,
+            CreatedAt = now,
             ChatId = request.ChatId,
             UserId = userId
         };
 
         await _context.Messages.AddAsync(AIMessage);
-        currentChat.LastMessageAt = DateTime.UtcNow;
+
+        if (result.NeedVerify)
+        {
+            var verifiableQa = new VerifiableQa
+            {
+                MessageId = AIMessage.MessageId,
+                UserId = userId,
+                OriginalQuestion = request.Content,
+                RewrittenQuestion = result.RewrittenQuestion,
+                GeneratedAnswer = result.Content,
+                Status = VerifiableQaStatus.Pending,
+                ApprovedAnswer = null,
+                Embedding = null,
+                CreatedAt = now,
+                UpdatedAt = now,
+                Message = AIMessage
+            };
+
+            await _context.VerifiableQas.AddAsync(verifiableQa);
+        }
+
+        currentChat.LastMessageAt = now;
 
         await _context.SaveChangesAsync();
-
         return AIMessage;
     }
+
 
     public async Task<List<MessageToFrontend>> GetMessagesByChatIdAsync(Guid chatId, int limit = 50)
     {
@@ -119,7 +148,7 @@ public class MessageService
                     MessageId = m.MessageId,
                     Content = m.Content,
                     MessageSegments = m.MessageSegments,
-                    CreatedAt = m.CreatedAt?? DateTime.UtcNow,
+                    CreatedAt = m.CreatedAt ?? DateTime.UtcNow,
                     SenderType = m.SenderType.ToString().ToLower(),
                     ChatId = m.ChatId
                 })

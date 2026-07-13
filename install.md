@@ -21,5 +21,8 @@ dotnet ef database update
 # 5. add extension in database
 CREATE EXTENSION IF NOT EXISTS vector;
 
+# (optional) 6. Seed majors
+dotnet run -- --seed-majors
+
 
 

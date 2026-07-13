@@ -8,4 +8,10 @@ public class RagResponse
 
     [JsonPropertyName("segments")]
     public required List<RagSegment> Segments { get; set; }
+
+    [JsonPropertyName("need_verify")]
+    public required bool NeedVerify { get; set; }
+
+    [JsonPropertyName("rewritten_question")]
+    public string? RewrittenQuestion { get; set; }
 }

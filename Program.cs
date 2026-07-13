@@ -9,13 +9,14 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Pgvector.EntityFrameworkCore;
+using MainBackend.Data.Seeders;
 
 
 namespace MainBackend;
 
 public class Program
 {
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
         Env.Load();
 
@@ -102,8 +103,23 @@ public class Program
         builder.Services.AddScoped<UserService>();
         builder.Services.AddScoped<ChatService>();
         builder.Services.AddScoped<MessageService>();
+        builder.Services.AddScoped<IAppDataService, UniDataService>();
 
         var app = builder.Build();
+
+        if (args.Contains("--seed-users"))
+        {
+            using var scope = app.Services.CreateScope();
+            await IdentitySeeder.SeedAdminAndLecturerAsync(scope.ServiceProvider);
+            return;
+        }
+
+        if (args.Contains("--seed-majors"))
+        {
+            using var scope = app.Services.CreateScope();
+            await MajorSeeder.SeedMajorsAsync(scope.ServiceProvider);
+            return;
+        }
 
         // 🔹 Middleware
         if (app.Environment.IsDevelopment())
