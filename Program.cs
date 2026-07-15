@@ -104,6 +104,7 @@ public class Program
         builder.Services.AddScoped<ChatService>();
         builder.Services.AddScoped<MessageService>();
         builder.Services.AddScoped<IAppDataService, UniDataService>();
+        builder.Services.AddScoped<IVerifiableQaService, VerifiableQaService>();
 
         var app = builder.Build();
 
@@ -125,6 +126,13 @@ public class Program
         {
             using var scope = app.Services.CreateScope();
             await LecturerSeeder.SeedLecturersAsync(scope.ServiceProvider);
+            return;
+        }
+
+        if (args.Contains("--seed-documents"))
+        {
+            using var scope = app.Services.CreateScope();
+            await DocumentSeeder.SeedDocumentsAsync(scope.ServiceProvider);
             return;
         }
 

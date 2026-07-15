@@ -62,6 +62,11 @@ public class AppDbContext : DbContext
             .WithMany()
             .UsingEntity("DocumentCourses");
 
+        modelBuilder.Entity<VerifiableQa>()
+            .HasMany(x => x.Courses)
+            .WithMany()
+            .UsingEntity("VerifiableQaCourses");
+
         modelBuilder.Entity<Message>()
             .HasOne(x => x.VerifiableQa)
             .WithOne(x => x.Message)

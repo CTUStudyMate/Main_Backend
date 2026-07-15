@@ -14,4 +14,7 @@ public class RagResponse
 
     [JsonPropertyName("rewritten_question")]
     public string? RewrittenQuestion { get; set; }
+
+    [JsonPropertyName("document_ids")]
+    public List<string> DocumentIds { get; set; } = new();
 }

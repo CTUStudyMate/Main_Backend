@@ -24,5 +24,6 @@ public class VerifiableQa
 
     public Message Message { get; set; } = null!;
     public User? User { get; set; }
+    public ICollection<Course> Courses { get; set; } = new List<Course>();
     public ICollection<CuratedQa> CuratedQas { get; set; } = new List<CuratedQa>();
 }

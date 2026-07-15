@@ -105,6 +105,26 @@ public class MessageService
 
         if (result.NeedVerify)
         {
+            var documentIds = result.DocumentIds
+                .Select(documentId => int.TryParse(documentId, out var parsedId) ? parsedId : (int?)null)
+                .Where(documentId => documentId.HasValue)
+                .Select(documentId => documentId!.Value)
+                .Distinct()
+                .ToList();
+
+            var relatedDocuments = await _context.Documents
+                .Include(document => document.Courses)
+                .Where(document => documentIds.Contains(document.DocumentId))
+                .ToListAsync();
+
+            var relatedCourses = relatedDocuments
+                .SelectMany(document => document.Courses)
+                .GroupBy(course => course.CourseId)
+                .OrderByDescending(group => group.Count())
+                .Take(3)
+                .Select(group => group.First())
+                .ToList();
+
             var verifiableQa = new VerifiableQa
             {
                 MessageId = AIMessage.MessageId,
@@ -122,6 +142,11 @@ public class MessageService
                 UpdatedAt = now,
                 Message = AIMessage
             };
+
+            foreach (var course in relatedCourses)
+            {
+                verifiableQa.Courses.Add(course);
+            }
 
             await _context.VerifiableQas.AddAsync(verifiableQa);
         }
