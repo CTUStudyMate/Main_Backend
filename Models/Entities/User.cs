@@ -21,6 +21,7 @@ public class User
 
     // Navigation property
     public Major? Major { get; set; }
+    public ICollection<Course> Courses { get; set; } = new List<Course>();
     public ICollection<Chat> Chats { get; set; } = new List<Chat>();
     public ICollection<Message> Messages { get; set; } = new List<Message>();
 }

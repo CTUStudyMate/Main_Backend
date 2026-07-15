@@ -114,6 +114,20 @@ public class Program
             return;
         }
 
+        if (args.Contains("--seed-courses"))
+        {
+            using var scope = app.Services.CreateScope();
+            await CourseSeeder.SeedCoursesAsync(scope.ServiceProvider);
+            return;
+        }
+
+        if (args.Contains("--seed-lecturers"))
+        {
+            using var scope = app.Services.CreateScope();
+            await LecturerSeeder.SeedLecturersAsync(scope.ServiceProvider);
+            return;
+        }
+
         if (args.Contains("--seed-majors"))
         {
             using var scope = app.Services.CreateScope();

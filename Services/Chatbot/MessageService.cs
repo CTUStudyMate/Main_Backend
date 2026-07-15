@@ -111,7 +111,10 @@ public class MessageService
                 UserId = userId,
                 OriginalQuestion = request.Content,
                 RewrittenQuestion = result.RewrittenQuestion,
-                GeneratedAnswer = result.Content,
+                // GeneratedAnswer = result.Content,
+                GeneratedAnswer = result.Segments.Count > 0
+                    ? JsonSerializer.Serialize(result.Segments)
+                    : result.Content,
                 Status = VerifiableQaStatus.Pending,
                 ApprovedAnswer = null,
                 Embedding = null,

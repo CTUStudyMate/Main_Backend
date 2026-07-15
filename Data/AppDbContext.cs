@@ -52,6 +52,16 @@ public class AppDbContext : DbContext
             .Property(x => x.Embedding)
             .HasColumnType("vector(1536)");
 
+        modelBuilder.Entity<User>()
+            .HasMany(x => x.Courses)
+            .WithMany(x => x.Lecturers)
+            .UsingEntity("LecturerCourses");
+
+        modelBuilder.Entity<Document>()
+            .HasMany(x => x.Courses)
+            .WithMany()
+            .UsingEntity("DocumentCourses");
+
         modelBuilder.Entity<Message>()
             .HasOne(x => x.VerifiableQa)
             .WithOne(x => x.Message)

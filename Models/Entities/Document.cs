@@ -23,4 +23,5 @@ public class Document
     public DateTime CreatedAt { get; set; }
 
     public User User { get; set; } = null!;
+    public ICollection<Course> Courses { get; set; } = new List<Course>();
 }
