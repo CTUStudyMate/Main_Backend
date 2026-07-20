@@ -9,6 +9,7 @@ dotnet add package DotNetEnv
 dotnet add package Microsoft.AspNetCore.Identity
 dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer
 dotnet add package Pgvector.EntityFrameworkCore
+dotnet add package OpenAI
 # 2. restore project
 dotnet restore
 

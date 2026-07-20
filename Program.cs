@@ -3,6 +3,7 @@ using DotNetEnv;
 using MainBackend.Services;
 using MainBackend.Models;
 using MainBackend.Configurations;
+using MainBackend.Services.BackgroundWorker;
 using Npgsql;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -39,6 +40,11 @@ public class Program
         builder.Services.Configure<RagEngineOptions>(
             builder.Configuration.GetSection("RagEngine")
         );
+        builder.Services.Configure<OpenAIOptions>(
+            builder.Configuration.GetSection(OpenAIOptions.SectionName)
+        );
+
+        builder.Services.AddSingleton<IEmbeddingService, OpenaiEmbeddingService>();
 
         builder.Services.AddCors(options =>
         {
@@ -69,6 +75,7 @@ public class Program
         {
             options.UseNpgsql(dataSource, o => o.UseVector());
         });
+        builder.Services.AddHostedService<BackgroundJobWorker>();
 
         // 🔹 Services
         builder.Services
@@ -90,7 +97,7 @@ public class Program
                 ValidateAudience = true,
                 ValidateIssuerSigningKey = true,
                 IssuerSigningKey = new SymmetricSecurityKey(
-                    Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]?? "dev-secret")
+                    Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"] ?? "dev-secret")
                 ),
                 ValidIssuer = builder.Configuration["Jwt:Issuer"],
                 ValidAudience = builder.Configuration["Jwt:Audience"]
@@ -104,6 +111,7 @@ public class Program
         builder.Services.AddScoped<ChatService>();
         builder.Services.AddScoped<MessageService>();
         builder.Services.AddScoped<IAppDataService, UniDataService>();
+        builder.Services.AddScoped<DocumentDataService>();
         builder.Services.AddScoped<IVerifiableQaService, VerifiableQaService>();
 
         var app = builder.Build();

@@ -34,7 +34,8 @@ public class MessageController : ControllerBase
             Content = aiMessage.Content,
             CreatedAt = aiMessage.CreatedAt ?? DateTime.UtcNow,
             SenderType = aiMessage.SenderType.ToString().ToLower(),
-            MessageSegments = aiMessage.MessageSegments
+            MessageSegments = aiMessage.MessageSegments,
+            IsVerify = aiMessage.VerifiableQa?.Status == VerifiableQaStatus.Approved
         });
     }
 

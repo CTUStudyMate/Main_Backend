@@ -1,14 +1,13 @@
 using MainBackend.Models;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace MainBackend.Services;
 
-public class UniDataService : IAppDataService
+public class DocumentDataService : IAppDataService
 {
     private readonly AppDbContext _db;
 
-    public UniDataService(AppDbContext db)
+    public DocumentDataService(AppDbContext db)
     {
         _db = db;
     }

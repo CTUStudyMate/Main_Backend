@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using MainBackend.Models;
+using MainBackend.Models.BackgroundWorker;
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 public class AppDbContext : DbContext
@@ -19,6 +20,8 @@ public class AppDbContext : DbContext
     public DbSet<CuratedQa> CuratedQas { get; set; }
     public DbSet<QuestionResponse> QuestionResponses { get; set; }
     public DbSet<QuestionItem> QuestionItems { get; set; }
+    public DbSet<BackgroundJob> BackgroundJobs { get; set; }
+    public DbSet<BackgroundJobLog> BackgroundJobLogs { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -51,6 +54,78 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<VerifiableQa>()
             .Property(x => x.Embedding)
             .HasColumnType("vector(1536)");
+
+        modelBuilder.Entity<BackgroundJob>()
+            .HasKey(job => job.JobId);
+
+        modelBuilder.Entity<BackgroundJob>()
+            .Property(x => x.Type)
+            .HasConversion(
+                value => ToSnakeCase(value),
+                value => ParseBackgroundJobType(value));
+
+        modelBuilder.Entity<BackgroundJob>()
+            .Property(x => x.Status)
+            .HasConversion(
+                value => ToSnakeCase(value),
+                value => ParseBackgroundJobStatus(value));
+
+        modelBuilder.Entity<BackgroundJob>()
+            .Property(x => x.SourceEntityType)
+            .HasConversion(
+                value => ToSnakeCase(value),
+                value => ParseBackgroundJobSourceEntityType(value));
+
+        modelBuilder.Entity<BackgroundJob>()
+            .Property(x => x.BusinessData)
+            .HasColumnType("jsonb");
+
+        modelBuilder.Entity<BackgroundJobLog>()
+            .Property(x => x.Level)
+            .HasConversion(
+                value => ToSnakeCase(value),
+                value => ParseBackgroundJobLogLevel(value));
+
+        modelBuilder.Entity<BackgroundJobLog>()
+            .Property(x => x.EventType)
+            .HasConversion(
+                value => ToSnakeCase(value),
+                value => ParseBackgroundJobLogEventType(value));
+
+        modelBuilder.Entity<BackgroundJobLog>()
+            .Property(x => x.Details)
+            .HasColumnType("jsonb");
+
+        modelBuilder.Entity<BackgroundJobLog>()
+            .HasOne(log => log.Job)
+            .WithMany()
+            .HasForeignKey(log => log.JobId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<BackgroundJob>()
+            .HasOne(job => job.VerifiableQa)
+            .WithMany()
+            .HasForeignKey(job => job.VerifiableQaId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<BackgroundJob>()
+            .HasOne(job => job.CuratedQa)
+            .WithMany()
+            .HasForeignKey(job => job.CuratedQaId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<BackgroundJob>()
+            .ToTable(table => table.HasCheckConstraint(
+                "CK_BackgroundJobs_ValidSourceEntity",
+                """
+                ("SourceEntityType" = 'verifiable_qa'
+                    AND "VerifiableQaId" IS NOT NULL
+                    AND "CuratedQaId" IS NULL)
+                OR
+                ("SourceEntityType" = 'curated_qa'
+                    AND "CuratedQaId" IS NOT NULL
+                    AND "VerifiableQaId" IS NULL)
+                """));
 
         modelBuilder.Entity<User>()
             .HasMany(x => x.Courses)
@@ -97,5 +172,42 @@ public class AppDbContext : DbContext
             .HasColumnType("jsonb");
 
         base.OnModelCreating(modelBuilder);
+    }
+
+    private static string ToSnakeCase<TEnum>(TEnum value)
+        where TEnum : struct, Enum
+    {
+        return JsonNamingPolicy.SnakeCaseLower.ConvertName(value.ToString());
+    }
+
+    private static BackgroundJobType ParseBackgroundJobType(string value)
+    {
+        return ParseSnakeCaseEnum<BackgroundJobType>(value);
+    }
+
+    private static BackgroundJobStatus ParseBackgroundJobStatus(string value)
+    {
+        return ParseSnakeCaseEnum<BackgroundJobStatus>(value);
+    }
+
+    private static BackgroundJobSourceEntityType ParseBackgroundJobSourceEntityType(string value)
+    {
+        return ParseSnakeCaseEnum<BackgroundJobSourceEntityType>(value);
+    }
+
+    private static BackgroundJobLogLevel ParseBackgroundJobLogLevel(string value)
+    {
+        return ParseSnakeCaseEnum<BackgroundJobLogLevel>(value);
+    }
+
+    private static BackgroundJobLogEventType ParseBackgroundJobLogEventType(string value)
+    {
+        return ParseSnakeCaseEnum<BackgroundJobLogEventType>(value);
+    }
+
+    private static TEnum ParseSnakeCaseEnum<TEnum>(string value)
+        where TEnum : struct, Enum
+    {
+        return Enum.Parse<TEnum>(value.Replace("_", string.Empty), ignoreCase: true);
     }
 }

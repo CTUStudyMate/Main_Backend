@@ -148,6 +148,7 @@ public class MessageService
                 verifiableQa.Courses.Add(course);
             }
 
+            AIMessage.VerifiableQa = verifiableQa;
             await _context.VerifiableQas.AddAsync(verifiableQa);
         }
 
@@ -176,6 +177,8 @@ public class MessageService
                     MessageId = m.MessageId,
                     Content = m.Content,
                     MessageSegments = m.MessageSegments,
+                    IsVerify = m.VerifiableQa != null &&
+                        m.VerifiableQa.Status == VerifiableQaStatus.Approved,
                     CreatedAt = m.CreatedAt ?? DateTime.UtcNow,
                     SenderType = m.SenderType.ToString().ToLower(),
                     ChatId = m.ChatId

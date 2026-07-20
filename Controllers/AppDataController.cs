@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using MainBackend.Services;
 
 namespace MainBackend.Controllers;
@@ -8,10 +9,14 @@ namespace MainBackend.Controllers;
 public class AppDataController : ControllerBase
 {
     private readonly IAppDataService _appDataService;
+    private readonly DocumentDataService _documentDataService;
 
-    public AppDataController(IAppDataService appDataService)
+    public AppDataController(
+        IAppDataService appDataService,
+        DocumentDataService documentDataService)
     {
         _appDataService = appDataService;
+        _documentDataService = documentDataService;
     }
 
     [HttpGet("majors")]
@@ -22,8 +27,27 @@ public class AppDataController : ControllerBase
         return Ok(majors);
     }
 
+    [Authorize]
+    [HttpGet("documents/{documentId}")]
+    public async Task<IActionResult> GetDocumentById(int documentId)
+    {
+        var document = await _documentDataService.GetDocumentById(documentId);
+
+        if (document == null)
+        {
+            return NotFound(new { message = "Document not found" });
+        }
+
+        return Ok(new
+        {
+            document.DocumentId,
+            document.DocumentTitle,
+            document.FileUrl
+        });
+    }
+
     [HttpGet("cohorts")]
-    public async Task<IActionResult> GetCohorts()
+    public IActionResult GetCohorts()
     {
         var cohorts = new[]
         {
