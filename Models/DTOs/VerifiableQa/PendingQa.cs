@@ -1,5 +1,6 @@
 namespace MainBackend.Models;
 
+// verifiableQA dto to frontend
 public class PendingQa
 {
     public int VerifiableQaId { get; set; }

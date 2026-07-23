@@ -1,0 +1,2177 @@
+[
+  {
+    "leftQuestionId": "q01",
+    "rightQuestionId": "q02",
+    "cosineSimilarity": 0.8023948315306233
+  },
+  {
+    "leftQuestionId": "q01",
+    "rightQuestionId": "q03",
+    "cosineSimilarity": 0.3090310327365674
+  },
+  {
+    "leftQuestionId": "q01",
+    "rightQuestionId": "q04",
+    "cosineSimilarity": 0.3361115580532202
+  },
+  {
+    "leftQuestionId": "q01",
+    "rightQuestionId": "q05",
+    "cosineSimilarity": 0.9583684509740873
+  },
+  {
+    "leftQuestionId": "q01",
+    "rightQuestionId": "q06",
+    "cosineSimilarity": 0.368085432359396
+  },
+  {
+    "leftQuestionId": "q01",
+    "rightQuestionId": "q07",
+    "cosineSimilarity": 0.3489731767956306
+  },
+  {
+    "leftQuestionId": "q01",
+    "rightQuestionId": "q08",
+    "cosineSimilarity": 0.15513485704538638
+  },
+  {
+    "leftQuestionId": "q01",
+    "rightQuestionId": "q09",
+    "cosineSimilarity": 0.14947595713493783
+  },
+  {
+    "leftQuestionId": "q01",
+    "rightQuestionId": "q10",
+    "cosineSimilarity": 0.3412693407403667
+  },
+  {
+    "leftQuestionId": "q01",
+    "rightQuestionId": "q11",
+    "cosineSimilarity": 0.41706322308245247
+  },
+  {
+    "leftQuestionId": "q01",
+    "rightQuestionId": "q12",
+    "cosineSimilarity": 0.47756734586299
+  },
+  {
+    "leftQuestionId": "q01",
+    "rightQuestionId": "q13",
+    "cosineSimilarity": 0.25096919841490367
+  },
+  {
+    "leftQuestionId": "q01",
+    "rightQuestionId": "q14",
+    "cosineSimilarity": 0.23770687736516743
+  },
+  {
+    "leftQuestionId": "q01",
+    "rightQuestionId": "q15",
+    "cosineSimilarity": 0.4073837941446891
+  },
+  {
+    "leftQuestionId": "q01",
+    "rightQuestionId": "q16",
+    "cosineSimilarity": 0.14539828388436568
+  },
+  {
+    "leftQuestionId": "q01",
+    "rightQuestionId": "q17",
+    "cosineSimilarity": 0.17763040238957287
+  },
+  {
+    "leftQuestionId": "q01",
+    "rightQuestionId": "q18",
+    "cosineSimilarity": 0.11564857989299605
+  },
+  {
+    "leftQuestionId": "q01",
+    "rightQuestionId": "q19",
+    "cosineSimilarity": 0.10269113628711442
+  },
+  {
+    "leftQuestionId": "q01",
+    "rightQuestionId": "q20",
+    "cosineSimilarity": 0.139893345263
+  },
+  {
+    "leftQuestionId": "q01",
+    "rightQuestionId": "q21",
+    "cosineSimilarity": 0.19333027514326023
+  },
+  {
+    "leftQuestionId": "q01",
+    "rightQuestionId": "q22",
+    "cosineSimilarity": 0.18397254671679705
+  },
+  {
+    "leftQuestionId": "q01",
+    "rightQuestionId": "q23",
+    "cosineSimilarity": 0.12354050792589652
+  },
+  {
+    "leftQuestionId": "q01",
+    "rightQuestionId": "q24",
+    "cosineSimilarity": 0.09438328031841704
+  },
+  {
+    "leftQuestionId": "q01",
+    "rightQuestionId": "q25",
+    "cosineSimilarity": 0.18317285720270524
+  },
+  {
+    "leftQuestionId": "q01",
+    "rightQuestionId": "q26",
+    "cosineSimilarity": 0.1331825282672007
+  },
+  {
+    "leftQuestionId": "q01",
+    "rightQuestionId": "q27",
+    "cosineSimilarity": 0.13855921126487983
+  },
+  {
+    "leftQuestionId": "q01",
+    "rightQuestionId": "q28",
+    "cosineSimilarity": 0.054360665482964504
+  },
+  {
+    "leftQuestionId": "q01",
+    "rightQuestionId": "q29",
+    "cosineSimilarity": 0.08801572967706132
+  },
+  {
+    "leftQuestionId": "q01",
+    "rightQuestionId": "q30",
+    "cosineSimilarity": 0.1238620633609825
+  },
+  {
+    "leftQuestionId": "q02",
+    "rightQuestionId": "q03",
+    "cosineSimilarity": 0.3104014431346547
+  },
+  {
+    "leftQuestionId": "q02",
+    "rightQuestionId": "q04",
+    "cosineSimilarity": 0.37185978017029736
+  },
+  {
+    "leftQuestionId": "q02",
+    "rightQuestionId": "q05",
+    "cosineSimilarity": 0.79898272194887
+  },
+  {
+    "leftQuestionId": "q02",
+    "rightQuestionId": "q06",
+    "cosineSimilarity": 0.37242468773787585
+  },
+  {
+    "leftQuestionId": "q02",
+    "rightQuestionId": "q07",
+    "cosineSimilarity": 0.37375640419712236
+  },
+  {
+    "leftQuestionId": "q02",
+    "rightQuestionId": "q08",
+    "cosineSimilarity": 0.17459717062984006
+  },
+  {
+    "leftQuestionId": "q02",
+    "rightQuestionId": "q09",
+    "cosineSimilarity": 0.1692348973691332
+  },
+  {
+    "leftQuestionId": "q02",
+    "rightQuestionId": "q10",
+    "cosineSimilarity": 0.3396572327797742
+  },
+  {
+    "leftQuestionId": "q02",
+    "rightQuestionId": "q11",
+    "cosineSimilarity": 0.39907186304350106
+  },
+  {
+    "leftQuestionId": "q02",
+    "rightQuestionId": "q12",
+    "cosineSimilarity": 0.4754368313783286
+  },
+  {
+    "leftQuestionId": "q02",
+    "rightQuestionId": "q13",
+    "cosineSimilarity": 0.26715423669009974
+  },
+  {
+    "leftQuestionId": "q02",
+    "rightQuestionId": "q14",
+    "cosineSimilarity": 0.25855838130038133
+  },
+  {
+    "leftQuestionId": "q02",
+    "rightQuestionId": "q15",
+    "cosineSimilarity": 0.3883507257706375
+  },
+  {
+    "leftQuestionId": "q02",
+    "rightQuestionId": "q16",
+    "cosineSimilarity": 0.19194943144210116
+  },
+  {
+    "leftQuestionId": "q02",
+    "rightQuestionId": "q17",
+    "cosineSimilarity": 0.20318644957456225
+  },
+  {
+    "leftQuestionId": "q02",
+    "rightQuestionId": "q18",
+    "cosineSimilarity": 0.11851884525969437
+  },
+  {
+    "leftQuestionId": "q02",
+    "rightQuestionId": "q19",
+    "cosineSimilarity": 0.09835580161669076
+  },
+  {
+    "leftQuestionId": "q02",
+    "rightQuestionId": "q20",
+    "cosineSimilarity": 0.18697753362332695
+  },
+  {
+    "leftQuestionId": "q02",
+    "rightQuestionId": "q21",
+    "cosineSimilarity": 0.25991552395114664
+  },
+  {
+    "leftQuestionId": "q02",
+    "rightQuestionId": "q22",
+    "cosineSimilarity": 0.24442327596108807
+  },
+  {
+    "leftQuestionId": "q02",
+    "rightQuestionId": "q23",
+    "cosineSimilarity": 0.11786343759453677
+  },
+  {
+    "leftQuestionId": "q02",
+    "rightQuestionId": "q24",
+    "cosineSimilarity": 0.08575055631893284
+  },
+  {
+    "leftQuestionId": "q02",
+    "rightQuestionId": "q25",
+    "cosineSimilarity": 0.24653272099011772
+  },
+  {
+    "leftQuestionId": "q02",
+    "rightQuestionId": "q26",
+    "cosineSimilarity": 0.21308133277600677
+  },
+  {
+    "leftQuestionId": "q02",
+    "rightQuestionId": "q27",
+    "cosineSimilarity": 0.20129890026567315
+  },
+  {
+    "leftQuestionId": "q02",
+    "rightQuestionId": "q28",
+    "cosineSimilarity": 0.05601151296398179
+  },
+  {
+    "leftQuestionId": "q02",
+    "rightQuestionId": "q29",
+    "cosineSimilarity": 0.08484728884698477
+  },
+  {
+    "leftQuestionId": "q02",
+    "rightQuestionId": "q30",
+    "cosineSimilarity": 0.20319016577148824
+  },
+  {
+    "leftQuestionId": "q03",
+    "rightQuestionId": "q04",
+    "cosineSimilarity": 0.9340760953577119
+  },
+  {
+    "leftQuestionId": "q03",
+    "rightQuestionId": "q05",
+    "cosineSimilarity": 0.31141875567523825
+  },
+  {
+    "leftQuestionId": "q03",
+    "rightQuestionId": "q06",
+    "cosineSimilarity": 0.24522538495424026
+  },
+  {
+    "leftQuestionId": "q03",
+    "rightQuestionId": "q07",
+    "cosineSimilarity": 0.25533972802445737
+  },
+  {
+    "leftQuestionId": "q03",
+    "rightQuestionId": "q08",
+    "cosineSimilarity": 0.5435771468394249
+  },
+  {
+    "leftQuestionId": "q03",
+    "rightQuestionId": "q09",
+    "cosineSimilarity": 0.5415459249765069
+  },
+  {
+    "leftQuestionId": "q03",
+    "rightQuestionId": "q10",
+    "cosineSimilarity": 0.24496145148925771
+  },
+  {
+    "leftQuestionId": "q03",
+    "rightQuestionId": "q11",
+    "cosineSimilarity": 0.29310898621761966
+  },
+  {
+    "leftQuestionId": "q03",
+    "rightQuestionId": "q12",
+    "cosineSimilarity": 0.28333594356363023
+  },
+  {
+    "leftQuestionId": "q03",
+    "rightQuestionId": "q13",
+    "cosineSimilarity": 0.6571439648701428
+  },
+  {
+    "leftQuestionId": "q03",
+    "rightQuestionId": "q14",
+    "cosineSimilarity": 0.6359939806969334
+  },
+  {
+    "leftQuestionId": "q03",
+    "rightQuestionId": "q15",
+    "cosineSimilarity": 0.2971958190583976
+  },
+  {
+    "leftQuestionId": "q03",
+    "rightQuestionId": "q16",
+    "cosineSimilarity": 0.044607875917651266
+  },
+  {
+    "leftQuestionId": "q03",
+    "rightQuestionId": "q17",
+    "cosineSimilarity": 0.05928558787835045
+  },
+  {
+    "leftQuestionId": "q03",
+    "rightQuestionId": "q18",
+    "cosineSimilarity": 0.34962109596717594
+  },
+  {
+    "leftQuestionId": "q03",
+    "rightQuestionId": "q19",
+    "cosineSimilarity": 0.3327571507133982
+  },
+  {
+    "leftQuestionId": "q03",
+    "rightQuestionId": "q20",
+    "cosineSimilarity": 0.059439531643269934
+  },
+  {
+    "leftQuestionId": "q03",
+    "rightQuestionId": "q21",
+    "cosineSimilarity": 0.07173189516449728
+  },
+  {
+    "leftQuestionId": "q03",
+    "rightQuestionId": "q22",
+    "cosineSimilarity": 0.09254602126556753
+  },
+  {
+    "leftQuestionId": "q03",
+    "rightQuestionId": "q23",
+    "cosineSimilarity": 0.3179442990970634
+  },
+  {
+    "leftQuestionId": "q03",
+    "rightQuestionId": "q24",
+    "cosineSimilarity": 0.31175477245911126
+  },
+  {
+    "leftQuestionId": "q03",
+    "rightQuestionId": "q25",
+    "cosineSimilarity": 0.08095238356158282
+  },
+  {
+    "leftQuestionId": "q03",
+    "rightQuestionId": "q26",
+    "cosineSimilarity": 0.10340801787416284
+  },
+  {
+    "leftQuestionId": "q03",
+    "rightQuestionId": "q27",
+    "cosineSimilarity": 0.14702301728561265
+  },
+  {
+    "leftQuestionId": "q03",
+    "rightQuestionId": "q28",
+    "cosineSimilarity": 0.32131671294328135
+  },
+  {
+    "leftQuestionId": "q03",
+    "rightQuestionId": "q29",
+    "cosineSimilarity": 0.36051571621462747
+  },
+  {
+    "leftQuestionId": "q03",
+    "rightQuestionId": "q30",
+    "cosineSimilarity": 0.11668800577756455
+  },
+  {
+    "leftQuestionId": "q04",
+    "rightQuestionId": "q05",
+    "cosineSimilarity": 0.3363000735260983
+  },
+  {
+    "leftQuestionId": "q04",
+    "rightQuestionId": "q06",
+    "cosineSimilarity": 0.2727067503762854
+  },
+  {
+    "leftQuestionId": "q04",
+    "rightQuestionId": "q07",
+    "cosineSimilarity": 0.28215348383881905
+  },
+  {
+    "leftQuestionId": "q04",
+    "rightQuestionId": "q08",
+    "cosineSimilarity": 0.5208970836863694
+  },
+  {
+    "leftQuestionId": "q04",
+    "rightQuestionId": "q09",
+    "cosineSimilarity": 0.5229471238582701
+  },
+  {
+    "leftQuestionId": "q04",
+    "rightQuestionId": "q10",
+    "cosineSimilarity": 0.26568216491568847
+  },
+  {
+    "leftQuestionId": "q04",
+    "rightQuestionId": "q11",
+    "cosineSimilarity": 0.32918993265569935
+  },
+  {
+    "leftQuestionId": "q04",
+    "rightQuestionId": "q12",
+    "cosineSimilarity": 0.31274681381901914
+  },
+  {
+    "leftQuestionId": "q04",
+    "rightQuestionId": "q13",
+    "cosineSimilarity": 0.6533609704472675
+  },
+  {
+    "leftQuestionId": "q04",
+    "rightQuestionId": "q14",
+    "cosineSimilarity": 0.6326889029636221
+  },
+  {
+    "leftQuestionId": "q04",
+    "rightQuestionId": "q15",
+    "cosineSimilarity": 0.3304704415314925
+  },
+  {
+    "leftQuestionId": "q04",
+    "rightQuestionId": "q16",
+    "cosineSimilarity": 0.022080224622959065
+  },
+  {
+    "leftQuestionId": "q04",
+    "rightQuestionId": "q17",
+    "cosineSimilarity": 0.026768012783541188
+  },
+  {
+    "leftQuestionId": "q04",
+    "rightQuestionId": "q18",
+    "cosineSimilarity": 0.3252927627935968
+  },
+  {
+    "leftQuestionId": "q04",
+    "rightQuestionId": "q19",
+    "cosineSimilarity": 0.3050284984555468
+  },
+  {
+    "leftQuestionId": "q04",
+    "rightQuestionId": "q20",
+    "cosineSimilarity": 0.0353979174451271
+  },
+  {
+    "leftQuestionId": "q04",
+    "rightQuestionId": "q21",
+    "cosineSimilarity": 0.03571904327556777
+  },
+  {
+    "leftQuestionId": "q04",
+    "rightQuestionId": "q22",
+    "cosineSimilarity": 0.05829924177332225
+  },
+  {
+    "leftQuestionId": "q04",
+    "rightQuestionId": "q23",
+    "cosineSimilarity": 0.2767469248147266
+  },
+  {
+    "leftQuestionId": "q04",
+    "rightQuestionId": "q24",
+    "cosineSimilarity": 0.26820852764610115
+  },
+  {
+    "leftQuestionId": "q04",
+    "rightQuestionId": "q25",
+    "cosineSimilarity": 0.043018125100198694
+  },
+  {
+    "leftQuestionId": "q04",
+    "rightQuestionId": "q26",
+    "cosineSimilarity": 0.0914621141721219
+  },
+  {
+    "leftQuestionId": "q04",
+    "rightQuestionId": "q27",
+    "cosineSimilarity": 0.12038904227462818
+  },
+  {
+    "leftQuestionId": "q04",
+    "rightQuestionId": "q28",
+    "cosineSimilarity": 0.2862537963821081
+  },
+  {
+    "leftQuestionId": "q04",
+    "rightQuestionId": "q29",
+    "cosineSimilarity": 0.3195212743931995
+  },
+  {
+    "leftQuestionId": "q04",
+    "rightQuestionId": "q30",
+    "cosineSimilarity": 0.10158965047748297
+  },
+  {
+    "leftQuestionId": "q05",
+    "rightQuestionId": "q06",
+    "cosineSimilarity": 0.3545611301941845
+  },
+  {
+    "leftQuestionId": "q05",
+    "rightQuestionId": "q07",
+    "cosineSimilarity": 0.3291482354496953
+  },
+  {
+    "leftQuestionId": "q05",
+    "rightQuestionId": "q08",
+    "cosineSimilarity": 0.14885476675104292
+  },
+  {
+    "leftQuestionId": "q05",
+    "rightQuestionId": "q09",
+    "cosineSimilarity": 0.14232361457016923
+  },
+  {
+    "leftQuestionId": "q05",
+    "rightQuestionId": "q10",
+    "cosineSimilarity": 0.3581721697168272
+  },
+  {
+    "leftQuestionId": "q05",
+    "rightQuestionId": "q11",
+    "cosineSimilarity": 0.3875796494525854
+  },
+  {
+    "leftQuestionId": "q05",
+    "rightQuestionId": "q12",
+    "cosineSimilarity": 0.44646355430423285
+  },
+  {
+    "leftQuestionId": "q05",
+    "rightQuestionId": "q13",
+    "cosineSimilarity": 0.23918735919484943
+  },
+  {
+    "leftQuestionId": "q05",
+    "rightQuestionId": "q14",
+    "cosineSimilarity": 0.22559999226058047
+  },
+  {
+    "leftQuestionId": "q05",
+    "rightQuestionId": "q15",
+    "cosineSimilarity": 0.4135717429026101
+  },
+  {
+    "leftQuestionId": "q05",
+    "rightQuestionId": "q16",
+    "cosineSimilarity": 0.1359688467805978
+  },
+  {
+    "leftQuestionId": "q05",
+    "rightQuestionId": "q17",
+    "cosineSimilarity": 0.17251878526853942
+  },
+  {
+    "leftQuestionId": "q05",
+    "rightQuestionId": "q18",
+    "cosineSimilarity": 0.11404812364413461
+  },
+  {
+    "leftQuestionId": "q05",
+    "rightQuestionId": "q19",
+    "cosineSimilarity": 0.09570913226469303
+  },
+  {
+    "leftQuestionId": "q05",
+    "rightQuestionId": "q20",
+    "cosineSimilarity": 0.15640224417374407
+  },
+  {
+    "leftQuestionId": "q05",
+    "rightQuestionId": "q21",
+    "cosineSimilarity": 0.19136855232897884
+  },
+  {
+    "leftQuestionId": "q05",
+    "rightQuestionId": "q22",
+    "cosineSimilarity": 0.18364660283964931
+  },
+  {
+    "leftQuestionId": "q05",
+    "rightQuestionId": "q23",
+    "cosineSimilarity": 0.12194797955086967
+  },
+  {
+    "leftQuestionId": "q05",
+    "rightQuestionId": "q24",
+    "cosineSimilarity": 0.09838592805025015
+  },
+  {
+    "leftQuestionId": "q05",
+    "rightQuestionId": "q25",
+    "cosineSimilarity": 0.21461476865833257
+  },
+  {
+    "leftQuestionId": "q05",
+    "rightQuestionId": "q26",
+    "cosineSimilarity": 0.136470855976554
+  },
+  {
+    "leftQuestionId": "q05",
+    "rightQuestionId": "q27",
+    "cosineSimilarity": 0.13981235990842136
+  },
+  {
+    "leftQuestionId": "q05",
+    "rightQuestionId": "q28",
+    "cosineSimilarity": 0.06636439240868124
+  },
+  {
+    "leftQuestionId": "q05",
+    "rightQuestionId": "q29",
+    "cosineSimilarity": 0.10042840152126825
+  },
+  {
+    "leftQuestionId": "q05",
+    "rightQuestionId": "q30",
+    "cosineSimilarity": 0.15424487837327536
+  },
+  {
+    "leftQuestionId": "q06",
+    "rightQuestionId": "q07",
+    "cosineSimilarity": 0.8698380054189376
+  },
+  {
+    "leftQuestionId": "q06",
+    "rightQuestionId": "q08",
+    "cosineSimilarity": 0.45512452301945067
+  },
+  {
+    "leftQuestionId": "q06",
+    "rightQuestionId": "q09",
+    "cosineSimilarity": 0.4456735945751723
+  },
+  {
+    "leftQuestionId": "q06",
+    "rightQuestionId": "q10",
+    "cosineSimilarity": 0.9723067086244882
+  },
+  {
+    "leftQuestionId": "q06",
+    "rightQuestionId": "q11",
+    "cosineSimilarity": 0.4083919992756625
+  },
+  {
+    "leftQuestionId": "q06",
+    "rightQuestionId": "q12",
+    "cosineSimilarity": 0.3379149661542182
+  },
+  {
+    "leftQuestionId": "q06",
+    "rightQuestionId": "q13",
+    "cosineSimilarity": 0.29920129930195527
+  },
+  {
+    "leftQuestionId": "q06",
+    "rightQuestionId": "q14",
+    "cosineSimilarity": 0.27835883050601257
+  },
+  {
+    "leftQuestionId": "q06",
+    "rightQuestionId": "q15",
+    "cosineSimilarity": 0.3924424579084112
+  },
+  {
+    "leftQuestionId": "q06",
+    "rightQuestionId": "q16",
+    "cosineSimilarity": 0.1752590771248847
+  },
+  {
+    "leftQuestionId": "q06",
+    "rightQuestionId": "q17",
+    "cosineSimilarity": 0.16666766794715773
+  },
+  {
+    "leftQuestionId": "q06",
+    "rightQuestionId": "q18",
+    "cosineSimilarity": 0.1402807781890195
+  },
+  {
+    "leftQuestionId": "q06",
+    "rightQuestionId": "q19",
+    "cosineSimilarity": 0.15042863855124533
+  },
+  {
+    "leftQuestionId": "q06",
+    "rightQuestionId": "q20",
+    "cosineSimilarity": 0.16918208054169662
+  },
+  {
+    "leftQuestionId": "q06",
+    "rightQuestionId": "q21",
+    "cosineSimilarity": 0.20605297604115821
+  },
+  {
+    "leftQuestionId": "q06",
+    "rightQuestionId": "q22",
+    "cosineSimilarity": 0.22440294148416687
+  },
+  {
+    "leftQuestionId": "q06",
+    "rightQuestionId": "q23",
+    "cosineSimilarity": 0.13881984739971825
+  },
+  {
+    "leftQuestionId": "q06",
+    "rightQuestionId": "q24",
+    "cosineSimilarity": 0.13441509793074125
+  },
+  {
+    "leftQuestionId": "q06",
+    "rightQuestionId": "q25",
+    "cosineSimilarity": 0.19052205053908852
+  },
+  {
+    "leftQuestionId": "q06",
+    "rightQuestionId": "q26",
+    "cosineSimilarity": 0.14820082621214967
+  },
+  {
+    "leftQuestionId": "q06",
+    "rightQuestionId": "q27",
+    "cosineSimilarity": 0.14147067335917807
+  },
+  {
+    "leftQuestionId": "q06",
+    "rightQuestionId": "q28",
+    "cosineSimilarity": 0.12271807663256844
+  },
+  {
+    "leftQuestionId": "q06",
+    "rightQuestionId": "q29",
+    "cosineSimilarity": 0.09292588724759006
+  },
+  {
+    "leftQuestionId": "q06",
+    "rightQuestionId": "q30",
+    "cosineSimilarity": 0.1373406479051555
+  },
+  {
+    "leftQuestionId": "q07",
+    "rightQuestionId": "q08",
+    "cosineSimilarity": 0.45244449271120923
+  },
+  {
+    "leftQuestionId": "q07",
+    "rightQuestionId": "q09",
+    "cosineSimilarity": 0.4495683363646278
+  },
+  {
+    "leftQuestionId": "q07",
+    "rightQuestionId": "q10",
+    "cosineSimilarity": 0.8465021416346545
+  },
+  {
+    "leftQuestionId": "q07",
+    "rightQuestionId": "q11",
+    "cosineSimilarity": 0.3619542138163202
+  },
+  {
+    "leftQuestionId": "q07",
+    "rightQuestionId": "q12",
+    "cosineSimilarity": 0.34458208418942415
+  },
+  {
+    "leftQuestionId": "q07",
+    "rightQuestionId": "q13",
+    "cosineSimilarity": 0.315085445857744
+  },
+  {
+    "leftQuestionId": "q07",
+    "rightQuestionId": "q14",
+    "cosineSimilarity": 0.32279442791244956
+  },
+  {
+    "leftQuestionId": "q07",
+    "rightQuestionId": "q15",
+    "cosineSimilarity": 0.34399405896152446
+  },
+  {
+    "leftQuestionId": "q07",
+    "rightQuestionId": "q16",
+    "cosineSimilarity": 0.21673125292124648
+  },
+  {
+    "leftQuestionId": "q07",
+    "rightQuestionId": "q17",
+    "cosineSimilarity": 0.1970536235720522
+  },
+  {
+    "leftQuestionId": "q07",
+    "rightQuestionId": "q18",
+    "cosineSimilarity": 0.14973610997287903
+  },
+  {
+    "leftQuestionId": "q07",
+    "rightQuestionId": "q19",
+    "cosineSimilarity": 0.16067544805247574
+  },
+  {
+    "leftQuestionId": "q07",
+    "rightQuestionId": "q20",
+    "cosineSimilarity": 0.20644326579987665
+  },
+  {
+    "leftQuestionId": "q07",
+    "rightQuestionId": "q21",
+    "cosineSimilarity": 0.23352662222405338
+  },
+  {
+    "leftQuestionId": "q07",
+    "rightQuestionId": "q22",
+    "cosineSimilarity": 0.2448223114568624
+  },
+  {
+    "leftQuestionId": "q07",
+    "rightQuestionId": "q23",
+    "cosineSimilarity": 0.1473361105637833
+  },
+  {
+    "leftQuestionId": "q07",
+    "rightQuestionId": "q24",
+    "cosineSimilarity": 0.14628386225066795
+  },
+  {
+    "leftQuestionId": "q07",
+    "rightQuestionId": "q25",
+    "cosineSimilarity": 0.21529689858383405
+  },
+  {
+    "leftQuestionId": "q07",
+    "rightQuestionId": "q26",
+    "cosineSimilarity": 0.15321823276058133
+  },
+  {
+    "leftQuestionId": "q07",
+    "rightQuestionId": "q27",
+    "cosineSimilarity": 0.14601185878296288
+  },
+  {
+    "leftQuestionId": "q07",
+    "rightQuestionId": "q28",
+    "cosineSimilarity": 0.13009941529831942
+  },
+  {
+    "leftQuestionId": "q07",
+    "rightQuestionId": "q29",
+    "cosineSimilarity": 0.0985366077277569
+  },
+  {
+    "leftQuestionId": "q07",
+    "rightQuestionId": "q30",
+    "cosineSimilarity": 0.13918609054484418
+  },
+  {
+    "leftQuestionId": "q08",
+    "rightQuestionId": "q09",
+    "cosineSimilarity": 0.995480513228074
+  },
+  {
+    "leftQuestionId": "q08",
+    "rightQuestionId": "q10",
+    "cosineSimilarity": 0.44239456257619364
+  },
+  {
+    "leftQuestionId": "q08",
+    "rightQuestionId": "q11",
+    "cosineSimilarity": 0.18609878658143775
+  },
+  {
+    "leftQuestionId": "q08",
+    "rightQuestionId": "q12",
+    "cosineSimilarity": 0.18784706593344602
+  },
+  {
+    "leftQuestionId": "q08",
+    "rightQuestionId": "q13",
+    "cosineSimilarity": 0.4565453203564688
+  },
+  {
+    "leftQuestionId": "q08",
+    "rightQuestionId": "q14",
+    "cosineSimilarity": 0.4732717380907219
+  },
+  {
+    "leftQuestionId": "q08",
+    "rightQuestionId": "q15",
+    "cosineSimilarity": 0.18013345171642098
+  },
+  {
+    "leftQuestionId": "q08",
+    "rightQuestionId": "q16",
+    "cosineSimilarity": 0.11078061903485632
+  },
+  {
+    "leftQuestionId": "q08",
+    "rightQuestionId": "q17",
+    "cosineSimilarity": 0.09262753252324296
+  },
+  {
+    "leftQuestionId": "q08",
+    "rightQuestionId": "q18",
+    "cosineSimilarity": 0.3181808826076566
+  },
+  {
+    "leftQuestionId": "q08",
+    "rightQuestionId": "q19",
+    "cosineSimilarity": 0.3167519803343
+  },
+  {
+    "leftQuestionId": "q08",
+    "rightQuestionId": "q20",
+    "cosineSimilarity": 0.11758764539504431
+  },
+  {
+    "leftQuestionId": "q08",
+    "rightQuestionId": "q21",
+    "cosineSimilarity": 0.13270267168185892
+  },
+  {
+    "leftQuestionId": "q08",
+    "rightQuestionId": "q22",
+    "cosineSimilarity": 0.12411481070698907
+  },
+  {
+    "leftQuestionId": "q08",
+    "rightQuestionId": "q23",
+    "cosineSimilarity": 0.3051943752599276
+  },
+  {
+    "leftQuestionId": "q08",
+    "rightQuestionId": "q24",
+    "cosineSimilarity": 0.34045520655135375
+  },
+  {
+    "leftQuestionId": "q08",
+    "rightQuestionId": "q25",
+    "cosineSimilarity": 0.13045163530151496
+  },
+  {
+    "leftQuestionId": "q08",
+    "rightQuestionId": "q26",
+    "cosineSimilarity": 0.08000446626208213
+  },
+  {
+    "leftQuestionId": "q08",
+    "rightQuestionId": "q27",
+    "cosineSimilarity": 0.1100220203831263
+  },
+  {
+    "leftQuestionId": "q08",
+    "rightQuestionId": "q28",
+    "cosineSimilarity": 0.2763334220511272
+  },
+  {
+    "leftQuestionId": "q08",
+    "rightQuestionId": "q29",
+    "cosineSimilarity": 0.28925554136554105
+  },
+  {
+    "leftQuestionId": "q08",
+    "rightQuestionId": "q30",
+    "cosineSimilarity": 0.08434310831199208
+  },
+  {
+    "leftQuestionId": "q09",
+    "rightQuestionId": "q10",
+    "cosineSimilarity": 0.4325505754031781
+  },
+  {
+    "leftQuestionId": "q09",
+    "rightQuestionId": "q11",
+    "cosineSimilarity": 0.18457032991123842
+  },
+  {
+    "leftQuestionId": "q09",
+    "rightQuestionId": "q12",
+    "cosineSimilarity": 0.18800927241457555
+  },
+  {
+    "leftQuestionId": "q09",
+    "rightQuestionId": "q13",
+    "cosineSimilarity": 0.45789212599488915
+  },
+  {
+    "leftQuestionId": "q09",
+    "rightQuestionId": "q14",
+    "cosineSimilarity": 0.4795791459971387
+  },
+  {
+    "leftQuestionId": "q09",
+    "rightQuestionId": "q15",
+    "cosineSimilarity": 0.17875176481591426
+  },
+  {
+    "leftQuestionId": "q09",
+    "rightQuestionId": "q16",
+    "cosineSimilarity": 0.11072830611760892
+  },
+  {
+    "leftQuestionId": "q09",
+    "rightQuestionId": "q17",
+    "cosineSimilarity": 0.09322181958704494
+  },
+  {
+    "leftQuestionId": "q09",
+    "rightQuestionId": "q18",
+    "cosineSimilarity": 0.3170023235662906
+  },
+  {
+    "leftQuestionId": "q09",
+    "rightQuestionId": "q19",
+    "cosineSimilarity": 0.31808243570635725
+  },
+  {
+    "leftQuestionId": "q09",
+    "rightQuestionId": "q20",
+    "cosineSimilarity": 0.11737751464616558
+  },
+  {
+    "leftQuestionId": "q09",
+    "rightQuestionId": "q21",
+    "cosineSimilarity": 0.12713473792717936
+  },
+  {
+    "leftQuestionId": "q09",
+    "rightQuestionId": "q22",
+    "cosineSimilarity": 0.11933067228716092
+  },
+  {
+    "leftQuestionId": "q09",
+    "rightQuestionId": "q23",
+    "cosineSimilarity": 0.30217453537402383
+  },
+  {
+    "leftQuestionId": "q09",
+    "rightQuestionId": "q24",
+    "cosineSimilarity": 0.3385962139017967
+  },
+  {
+    "leftQuestionId": "q09",
+    "rightQuestionId": "q25",
+    "cosineSimilarity": 0.12495486268439492
+  },
+  {
+    "leftQuestionId": "q09",
+    "rightQuestionId": "q26",
+    "cosineSimilarity": 0.07715800451681577
+  },
+  {
+    "leftQuestionId": "q09",
+    "rightQuestionId": "q27",
+    "cosineSimilarity": 0.10724739452380377
+  },
+  {
+    "leftQuestionId": "q09",
+    "rightQuestionId": "q28",
+    "cosineSimilarity": 0.27763013010287074
+  },
+  {
+    "leftQuestionId": "q09",
+    "rightQuestionId": "q29",
+    "cosineSimilarity": 0.29031172206754013
+  },
+  {
+    "leftQuestionId": "q09",
+    "rightQuestionId": "q30",
+    "cosineSimilarity": 0.08129419430581666
+  },
+  {
+    "leftQuestionId": "q10",
+    "rightQuestionId": "q11",
+    "cosineSimilarity": 0.3816560794235011
+  },
+  {
+    "leftQuestionId": "q10",
+    "rightQuestionId": "q12",
+    "cosineSimilarity": 0.3106737937265218
+  },
+  {
+    "leftQuestionId": "q10",
+    "rightQuestionId": "q13",
+    "cosineSimilarity": 0.29075512501723133
+  },
+  {
+    "leftQuestionId": "q10",
+    "rightQuestionId": "q14",
+    "cosineSimilarity": 0.26952336647029734
+  },
+  {
+    "leftQuestionId": "q10",
+    "rightQuestionId": "q15",
+    "cosineSimilarity": 0.40294332513897796
+  },
+  {
+    "leftQuestionId": "q10",
+    "rightQuestionId": "q16",
+    "cosineSimilarity": 0.16171705336846307
+  },
+  {
+    "leftQuestionId": "q10",
+    "rightQuestionId": "q17",
+    "cosineSimilarity": 0.15405301459513226
+  },
+  {
+    "leftQuestionId": "q10",
+    "rightQuestionId": "q18",
+    "cosineSimilarity": 0.1505410569204409
+  },
+  {
+    "leftQuestionId": "q10",
+    "rightQuestionId": "q19",
+    "cosineSimilarity": 0.15661831533376416
+  },
+  {
+    "leftQuestionId": "q10",
+    "rightQuestionId": "q20",
+    "cosineSimilarity": 0.1812650817761064
+  },
+  {
+    "leftQuestionId": "q10",
+    "rightQuestionId": "q21",
+    "cosineSimilarity": 0.1945721784025745
+  },
+  {
+    "leftQuestionId": "q10",
+    "rightQuestionId": "q22",
+    "cosineSimilarity": 0.2182874053309208
+  },
+  {
+    "leftQuestionId": "q10",
+    "rightQuestionId": "q23",
+    "cosineSimilarity": 0.1454464087912642
+  },
+  {
+    "leftQuestionId": "q10",
+    "rightQuestionId": "q24",
+    "cosineSimilarity": 0.14631055380599642
+  },
+  {
+    "leftQuestionId": "q10",
+    "rightQuestionId": "q25",
+    "cosineSimilarity": 0.2148271427683579
+  },
+  {
+    "leftQuestionId": "q10",
+    "rightQuestionId": "q26",
+    "cosineSimilarity": 0.14272180846991267
+  },
+  {
+    "leftQuestionId": "q10",
+    "rightQuestionId": "q27",
+    "cosineSimilarity": 0.13599779728346043
+  },
+  {
+    "leftQuestionId": "q10",
+    "rightQuestionId": "q28",
+    "cosineSimilarity": 0.13535223254904202
+  },
+  {
+    "leftQuestionId": "q10",
+    "rightQuestionId": "q29",
+    "cosineSimilarity": 0.11033238997245243
+  },
+  {
+    "leftQuestionId": "q10",
+    "rightQuestionId": "q30",
+    "cosineSimilarity": 0.16013381819562897
+  },
+  {
+    "leftQuestionId": "q11",
+    "rightQuestionId": "q12",
+    "cosineSimilarity": 0.8449454668520252
+  },
+  {
+    "leftQuestionId": "q11",
+    "rightQuestionId": "q13",
+    "cosineSimilarity": 0.48348570458399415
+  },
+  {
+    "leftQuestionId": "q11",
+    "rightQuestionId": "q14",
+    "cosineSimilarity": 0.4449261079412541
+  },
+  {
+    "leftQuestionId": "q11",
+    "rightQuestionId": "q15",
+    "cosineSimilarity": 0.975701506512148
+  },
+  {
+    "leftQuestionId": "q11",
+    "rightQuestionId": "q16",
+    "cosineSimilarity": 0.07410579784029978
+  },
+  {
+    "leftQuestionId": "q11",
+    "rightQuestionId": "q17",
+    "cosineSimilarity": 0.08689196010227904
+  },
+  {
+    "leftQuestionId": "q11",
+    "rightQuestionId": "q18",
+    "cosineSimilarity": 0.08609434633384908
+  },
+  {
+    "leftQuestionId": "q11",
+    "rightQuestionId": "q19",
+    "cosineSimilarity": 0.09419287787107597
+  },
+  {
+    "leftQuestionId": "q11",
+    "rightQuestionId": "q20",
+    "cosineSimilarity": 0.06917768151908227
+  },
+  {
+    "leftQuestionId": "q11",
+    "rightQuestionId": "q21",
+    "cosineSimilarity": 0.15091686774912924
+  },
+  {
+    "leftQuestionId": "q11",
+    "rightQuestionId": "q22",
+    "cosineSimilarity": 0.1698041150165385
+  },
+  {
+    "leftQuestionId": "q11",
+    "rightQuestionId": "q23",
+    "cosineSimilarity": 0.11595144397208292
+  },
+  {
+    "leftQuestionId": "q11",
+    "rightQuestionId": "q24",
+    "cosineSimilarity": 0.10906592668584504
+  },
+  {
+    "leftQuestionId": "q11",
+    "rightQuestionId": "q25",
+    "cosineSimilarity": 0.14037210116527313
+  },
+  {
+    "leftQuestionId": "q11",
+    "rightQuestionId": "q26",
+    "cosineSimilarity": 0.25890158216083586
+  },
+  {
+    "leftQuestionId": "q11",
+    "rightQuestionId": "q27",
+    "cosineSimilarity": 0.25858072417373845
+  },
+  {
+    "leftQuestionId": "q11",
+    "rightQuestionId": "q28",
+    "cosineSimilarity": 0.13427619150650752
+  },
+  {
+    "leftQuestionId": "q11",
+    "rightQuestionId": "q29",
+    "cosineSimilarity": 0.15979031290627593
+  },
+  {
+    "leftQuestionId": "q11",
+    "rightQuestionId": "q30",
+    "cosineSimilarity": 0.2515958816023726
+  },
+  {
+    "leftQuestionId": "q12",
+    "rightQuestionId": "q13",
+    "cosineSimilarity": 0.4442791199368967
+  },
+  {
+    "leftQuestionId": "q12",
+    "rightQuestionId": "q14",
+    "cosineSimilarity": 0.4220876344670768
+  },
+  {
+    "leftQuestionId": "q12",
+    "rightQuestionId": "q15",
+    "cosineSimilarity": 0.8240422933688621
+  },
+  {
+    "leftQuestionId": "q12",
+    "rightQuestionId": "q16",
+    "cosineSimilarity": 0.1101282387986207
+  },
+  {
+    "leftQuestionId": "q12",
+    "rightQuestionId": "q17",
+    "cosineSimilarity": 0.10553883533095697
+  },
+  {
+    "leftQuestionId": "q12",
+    "rightQuestionId": "q18",
+    "cosineSimilarity": 0.08154864127138123
+  },
+  {
+    "leftQuestionId": "q12",
+    "rightQuestionId": "q19",
+    "cosineSimilarity": 0.09137572590135638
+  },
+  {
+    "leftQuestionId": "q12",
+    "rightQuestionId": "q20",
+    "cosineSimilarity": 0.10567219785312773
+  },
+  {
+    "leftQuestionId": "q12",
+    "rightQuestionId": "q21",
+    "cosineSimilarity": 0.15557343805896814
+  },
+  {
+    "leftQuestionId": "q12",
+    "rightQuestionId": "q22",
+    "cosineSimilarity": 0.17350092630342923
+  },
+  {
+    "leftQuestionId": "q12",
+    "rightQuestionId": "q23",
+    "cosineSimilarity": 0.08748142391137549
+  },
+  {
+    "leftQuestionId": "q12",
+    "rightQuestionId": "q24",
+    "cosineSimilarity": 0.07812620367586723
+  },
+  {
+    "leftQuestionId": "q12",
+    "rightQuestionId": "q25",
+    "cosineSimilarity": 0.14565252175186336
+  },
+  {
+    "leftQuestionId": "q12",
+    "rightQuestionId": "q26",
+    "cosineSimilarity": 0.23181565761063502
+  },
+  {
+    "leftQuestionId": "q12",
+    "rightQuestionId": "q27",
+    "cosineSimilarity": 0.23206812374431313
+  },
+  {
+    "leftQuestionId": "q12",
+    "rightQuestionId": "q28",
+    "cosineSimilarity": 0.10408796101305304
+  },
+  {
+    "leftQuestionId": "q12",
+    "rightQuestionId": "q29",
+    "cosineSimilarity": 0.14043590511510953
+  },
+  {
+    "leftQuestionId": "q12",
+    "rightQuestionId": "q30",
+    "cosineSimilarity": 0.2270244590159386
+  },
+  {
+    "leftQuestionId": "q13",
+    "rightQuestionId": "q14",
+    "cosineSimilarity": 0.9536668502900197
+  },
+  {
+    "leftQuestionId": "q13",
+    "rightQuestionId": "q15",
+    "cosineSimilarity": 0.469630363615459
+  },
+  {
+    "leftQuestionId": "q13",
+    "rightQuestionId": "q16",
+    "cosineSimilarity": 0.004545824127192537
+  },
+  {
+    "leftQuestionId": "q13",
+    "rightQuestionId": "q17",
+    "cosineSimilarity": 0.004669276343022927
+  },
+  {
+    "leftQuestionId": "q13",
+    "rightQuestionId": "q18",
+    "cosineSimilarity": 0.2518403423290139
+  },
+  {
+    "leftQuestionId": "q13",
+    "rightQuestionId": "q19",
+    "cosineSimilarity": 0.24735510614433248
+  },
+  {
+    "leftQuestionId": "q13",
+    "rightQuestionId": "q20",
+    "cosineSimilarity": 0.013758900162450174
+  },
+  {
+    "leftQuestionId": "q13",
+    "rightQuestionId": "q21",
+    "cosineSimilarity": 0.06675119642504154
+  },
+  {
+    "leftQuestionId": "q13",
+    "rightQuestionId": "q22",
+    "cosineSimilarity": 0.09957703319150936
+  },
+  {
+    "leftQuestionId": "q13",
+    "rightQuestionId": "q23",
+    "cosineSimilarity": 0.2720816303363055
+  },
+  {
+    "leftQuestionId": "q13",
+    "rightQuestionId": "q24",
+    "cosineSimilarity": 0.2805058444482268
+  },
+  {
+    "leftQuestionId": "q13",
+    "rightQuestionId": "q25",
+    "cosineSimilarity": 0.06892044555602772
+  },
+  {
+    "leftQuestionId": "q13",
+    "rightQuestionId": "q26",
+    "cosineSimilarity": 0.13944508397573477
+  },
+  {
+    "leftQuestionId": "q13",
+    "rightQuestionId": "q27",
+    "cosineSimilarity": 0.15572801971079284
+  },
+  {
+    "leftQuestionId": "q13",
+    "rightQuestionId": "q28",
+    "cosineSimilarity": 0.3621192865393227
+  },
+  {
+    "leftQuestionId": "q13",
+    "rightQuestionId": "q29",
+    "cosineSimilarity": 0.36097297496048775
+  },
+  {
+    "leftQuestionId": "q13",
+    "rightQuestionId": "q30",
+    "cosineSimilarity": 0.14575969012784543
+  },
+  {
+    "leftQuestionId": "q14",
+    "rightQuestionId": "q15",
+    "cosineSimilarity": 0.4345105980155939
+  },
+  {
+    "leftQuestionId": "q14",
+    "rightQuestionId": "q16",
+    "cosineSimilarity": 0.028015291223779524
+  },
+  {
+    "leftQuestionId": "q14",
+    "rightQuestionId": "q17",
+    "cosineSimilarity": 0.03174289539435295
+  },
+  {
+    "leftQuestionId": "q14",
+    "rightQuestionId": "q18",
+    "cosineSimilarity": 0.27202267697397364
+  },
+  {
+    "leftQuestionId": "q14",
+    "rightQuestionId": "q19",
+    "cosineSimilarity": 0.2707842820261511
+  },
+  {
+    "leftQuestionId": "q14",
+    "rightQuestionId": "q20",
+    "cosineSimilarity": 0.03791225045616249
+  },
+  {
+    "leftQuestionId": "q14",
+    "rightQuestionId": "q21",
+    "cosineSimilarity": 0.05674559085087474
+  },
+  {
+    "leftQuestionId": "q14",
+    "rightQuestionId": "q22",
+    "cosineSimilarity": 0.0855450445918011
+  },
+  {
+    "leftQuestionId": "q14",
+    "rightQuestionId": "q23",
+    "cosineSimilarity": 0.2785684297998004
+  },
+  {
+    "leftQuestionId": "q14",
+    "rightQuestionId": "q24",
+    "cosineSimilarity": 0.28781000671060614
+  },
+  {
+    "leftQuestionId": "q14",
+    "rightQuestionId": "q25",
+    "cosineSimilarity": 0.06079353524105344
+  },
+  {
+    "leftQuestionId": "q14",
+    "rightQuestionId": "q26",
+    "cosineSimilarity": 0.12352528367739908
+  },
+  {
+    "leftQuestionId": "q14",
+    "rightQuestionId": "q27",
+    "cosineSimilarity": 0.14320931193651326
+  },
+  {
+    "leftQuestionId": "q14",
+    "rightQuestionId": "q28",
+    "cosineSimilarity": 0.379493705841654
+  },
+  {
+    "leftQuestionId": "q14",
+    "rightQuestionId": "q29",
+    "cosineSimilarity": 0.37779878323929617
+  },
+  {
+    "leftQuestionId": "q14",
+    "rightQuestionId": "q30",
+    "cosineSimilarity": 0.13055763185294866
+  },
+  {
+    "leftQuestionId": "q15",
+    "rightQuestionId": "q16",
+    "cosineSimilarity": 0.07660049245461237
+  },
+  {
+    "leftQuestionId": "q15",
+    "rightQuestionId": "q17",
+    "cosineSimilarity": 0.09030981196483902
+  },
+  {
+    "leftQuestionId": "q15",
+    "rightQuestionId": "q18",
+    "cosineSimilarity": 0.10019628168291078
+  },
+  {
+    "leftQuestionId": "q15",
+    "rightQuestionId": "q19",
+    "cosineSimilarity": 0.1065079891364515
+  },
+  {
+    "leftQuestionId": "q15",
+    "rightQuestionId": "q20",
+    "cosineSimilarity": 0.10070495665389821
+  },
+  {
+    "leftQuestionId": "q15",
+    "rightQuestionId": "q21",
+    "cosineSimilarity": 0.14563575144490273
+  },
+  {
+    "leftQuestionId": "q15",
+    "rightQuestionId": "q22",
+    "cosineSimilarity": 0.16574297878286717
+  },
+  {
+    "leftQuestionId": "q15",
+    "rightQuestionId": "q23",
+    "cosineSimilarity": 0.12699115967062785
+  },
+  {
+    "leftQuestionId": "q15",
+    "rightQuestionId": "q24",
+    "cosineSimilarity": 0.12326012123505115
+  },
+  {
+    "leftQuestionId": "q15",
+    "rightQuestionId": "q25",
+    "cosineSimilarity": 0.17538124683700815
+  },
+  {
+    "leftQuestionId": "q15",
+    "rightQuestionId": "q26",
+    "cosineSimilarity": 0.25641074050339674
+  },
+  {
+    "leftQuestionId": "q15",
+    "rightQuestionId": "q27",
+    "cosineSimilarity": 0.2565739329765728
+  },
+  {
+    "leftQuestionId": "q15",
+    "rightQuestionId": "q28",
+    "cosineSimilarity": 0.14419104336930874
+  },
+  {
+    "leftQuestionId": "q15",
+    "rightQuestionId": "q29",
+    "cosineSimilarity": 0.17010846625489806
+  },
+  {
+    "leftQuestionId": "q15",
+    "rightQuestionId": "q30",
+    "cosineSimilarity": 0.28120748581539995
+  },
+  {
+    "leftQuestionId": "q16",
+    "rightQuestionId": "q17",
+    "cosineSimilarity": 0.8607893772519277
+  },
+  {
+    "leftQuestionId": "q16",
+    "rightQuestionId": "q18",
+    "cosineSimilarity": 0.5049107246492002
+  },
+  {
+    "leftQuestionId": "q16",
+    "rightQuestionId": "q19",
+    "cosineSimilarity": 0.5110697801951195
+  },
+  {
+    "leftQuestionId": "q16",
+    "rightQuestionId": "q20",
+    "cosineSimilarity": 0.9837747988599101
+  },
+  {
+    "leftQuestionId": "q16",
+    "rightQuestionId": "q21",
+    "cosineSimilarity": 0.4306519109244603
+  },
+  {
+    "leftQuestionId": "q16",
+    "rightQuestionId": "q22",
+    "cosineSimilarity": 0.41202599519752275
+  },
+  {
+    "leftQuestionId": "q16",
+    "rightQuestionId": "q23",
+    "cosineSimilarity": 0.23624269107067788
+  },
+  {
+    "leftQuestionId": "q16",
+    "rightQuestionId": "q24",
+    "cosineSimilarity": 0.22563301815949452
+  },
+  {
+    "leftQuestionId": "q16",
+    "rightQuestionId": "q25",
+    "cosineSimilarity": 0.40950584143467234
+  },
+  {
+    "leftQuestionId": "q16",
+    "rightQuestionId": "q26",
+    "cosineSimilarity": 0.3177793589797962
+  },
+  {
+    "leftQuestionId": "q16",
+    "rightQuestionId": "q27",
+    "cosineSimilarity": 0.36888591640931817
+  },
+  {
+    "leftQuestionId": "q16",
+    "rightQuestionId": "q28",
+    "cosineSimilarity": 0.15900927334553064
+  },
+  {
+    "leftQuestionId": "q16",
+    "rightQuestionId": "q29",
+    "cosineSimilarity": 0.17117304942565145
+  },
+  {
+    "leftQuestionId": "q16",
+    "rightQuestionId": "q30",
+    "cosineSimilarity": 0.3051486993376302
+  },
+  {
+    "leftQuestionId": "q17",
+    "rightQuestionId": "q18",
+    "cosineSimilarity": 0.4799252248587941
+  },
+  {
+    "leftQuestionId": "q17",
+    "rightQuestionId": "q19",
+    "cosineSimilarity": 0.5049321428275725
+  },
+  {
+    "leftQuestionId": "q17",
+    "rightQuestionId": "q20",
+    "cosineSimilarity": 0.8528309713131894
+  },
+  {
+    "leftQuestionId": "q17",
+    "rightQuestionId": "q21",
+    "cosineSimilarity": 0.4298009068972061
+  },
+  {
+    "leftQuestionId": "q17",
+    "rightQuestionId": "q22",
+    "cosineSimilarity": 0.4218483808305079
+  },
+  {
+    "leftQuestionId": "q17",
+    "rightQuestionId": "q23",
+    "cosineSimilarity": 0.23194971829437142
+  },
+  {
+    "leftQuestionId": "q17",
+    "rightQuestionId": "q24",
+    "cosineSimilarity": 0.2217900002963888
+  },
+  {
+    "leftQuestionId": "q17",
+    "rightQuestionId": "q25",
+    "cosineSimilarity": 0.4088024235843383
+  },
+  {
+    "leftQuestionId": "q17",
+    "rightQuestionId": "q26",
+    "cosineSimilarity": 0.33710278131785065
+  },
+  {
+    "leftQuestionId": "q17",
+    "rightQuestionId": "q27",
+    "cosineSimilarity": 0.3736887329927104
+  },
+  {
+    "leftQuestionId": "q17",
+    "rightQuestionId": "q28",
+    "cosineSimilarity": 0.1593162331516242
+  },
+  {
+    "leftQuestionId": "q17",
+    "rightQuestionId": "q29",
+    "cosineSimilarity": 0.20177549355439706
+  },
+  {
+    "leftQuestionId": "q17",
+    "rightQuestionId": "q30",
+    "cosineSimilarity": 0.32435290400656736
+  },
+  {
+    "leftQuestionId": "q18",
+    "rightQuestionId": "q19",
+    "cosineSimilarity": 0.9472560859664632
+  },
+  {
+    "leftQuestionId": "q18",
+    "rightQuestionId": "q20",
+    "cosineSimilarity": 0.5107962934476935
+  },
+  {
+    "leftQuestionId": "q18",
+    "rightQuestionId": "q21",
+    "cosineSimilarity": 0.1955406527832722
+  },
+  {
+    "leftQuestionId": "q18",
+    "rightQuestionId": "q22",
+    "cosineSimilarity": 0.19132912621861833
+  },
+  {
+    "leftQuestionId": "q18",
+    "rightQuestionId": "q23",
+    "cosineSimilarity": 0.40834687875234593
+  },
+  {
+    "leftQuestionId": "q18",
+    "rightQuestionId": "q24",
+    "cosineSimilarity": 0.414151654245718
+  },
+  {
+    "leftQuestionId": "q18",
+    "rightQuestionId": "q25",
+    "cosineSimilarity": 0.20693944909077347
+  },
+  {
+    "leftQuestionId": "q18",
+    "rightQuestionId": "q26",
+    "cosineSimilarity": 0.2233245700464425
+  },
+  {
+    "leftQuestionId": "q18",
+    "rightQuestionId": "q27",
+    "cosineSimilarity": 0.2789274254412109
+  },
+  {
+    "leftQuestionId": "q18",
+    "rightQuestionId": "q28",
+    "cosineSimilarity": 0.4412794883052242
+  },
+  {
+    "leftQuestionId": "q18",
+    "rightQuestionId": "q29",
+    "cosineSimilarity": 0.42413016024209754
+  },
+  {
+    "leftQuestionId": "q18",
+    "rightQuestionId": "q30",
+    "cosineSimilarity": 0.23206999386637014
+  },
+  {
+    "leftQuestionId": "q19",
+    "rightQuestionId": "q20",
+    "cosineSimilarity": 0.5147475868585111
+  },
+  {
+    "leftQuestionId": "q19",
+    "rightQuestionId": "q21",
+    "cosineSimilarity": 0.21187037605199077
+  },
+  {
+    "leftQuestionId": "q19",
+    "rightQuestionId": "q22",
+    "cosineSimilarity": 0.2158329607574633
+  },
+  {
+    "leftQuestionId": "q19",
+    "rightQuestionId": "q23",
+    "cosineSimilarity": 0.41833449122731026
+  },
+  {
+    "leftQuestionId": "q19",
+    "rightQuestionId": "q24",
+    "cosineSimilarity": 0.4128683250060573
+  },
+  {
+    "leftQuestionId": "q19",
+    "rightQuestionId": "q25",
+    "cosineSimilarity": 0.22136072581457086
+  },
+  {
+    "leftQuestionId": "q19",
+    "rightQuestionId": "q26",
+    "cosineSimilarity": 0.22546757113103372
+  },
+  {
+    "leftQuestionId": "q19",
+    "rightQuestionId": "q27",
+    "cosineSimilarity": 0.27039340556159197
+  },
+  {
+    "leftQuestionId": "q19",
+    "rightQuestionId": "q28",
+    "cosineSimilarity": 0.4329958371799329
+  },
+  {
+    "leftQuestionId": "q19",
+    "rightQuestionId": "q29",
+    "cosineSimilarity": 0.42937182266298723
+  },
+  {
+    "leftQuestionId": "q19",
+    "rightQuestionId": "q30",
+    "cosineSimilarity": 0.23425471069001308
+  },
+  {
+    "leftQuestionId": "q20",
+    "rightQuestionId": "q21",
+    "cosineSimilarity": 0.42553141251185794
+  },
+  {
+    "leftQuestionId": "q20",
+    "rightQuestionId": "q22",
+    "cosineSimilarity": 0.41071505779103246
+  },
+  {
+    "leftQuestionId": "q20",
+    "rightQuestionId": "q23",
+    "cosineSimilarity": 0.2511909652781784
+  },
+  {
+    "leftQuestionId": "q20",
+    "rightQuestionId": "q24",
+    "cosineSimilarity": 0.2413268496414598
+  },
+  {
+    "leftQuestionId": "q20",
+    "rightQuestionId": "q25",
+    "cosineSimilarity": 0.43804000969094015
+  },
+  {
+    "leftQuestionId": "q20",
+    "rightQuestionId": "q26",
+    "cosineSimilarity": 0.30892051372899954
+  },
+  {
+    "leftQuestionId": "q20",
+    "rightQuestionId": "q27",
+    "cosineSimilarity": 0.3627308827088141
+  },
+  {
+    "leftQuestionId": "q20",
+    "rightQuestionId": "q28",
+    "cosineSimilarity": 0.16888972938234328
+  },
+  {
+    "leftQuestionId": "q20",
+    "rightQuestionId": "q29",
+    "cosineSimilarity": 0.1840311037251144
+  },
+  {
+    "leftQuestionId": "q20",
+    "rightQuestionId": "q30",
+    "cosineSimilarity": 0.3230566635014036
+  },
+  {
+    "leftQuestionId": "q21",
+    "rightQuestionId": "q22",
+    "cosineSimilarity": 0.9109274537754297
+  },
+  {
+    "leftQuestionId": "q21",
+    "rightQuestionId": "q23",
+    "cosineSimilarity": 0.5549848133490275
+  },
+  {
+    "leftQuestionId": "q21",
+    "rightQuestionId": "q24",
+    "cosineSimilarity": 0.5389153031060419
+  },
+  {
+    "leftQuestionId": "q21",
+    "rightQuestionId": "q25",
+    "cosineSimilarity": 0.9732806614497571
+  },
+  {
+    "leftQuestionId": "q21",
+    "rightQuestionId": "q26",
+    "cosineSimilarity": 0.45370054742169563
+  },
+  {
+    "leftQuestionId": "q21",
+    "rightQuestionId": "q27",
+    "cosineSimilarity": 0.42684657200008164
+  },
+  {
+    "leftQuestionId": "q21",
+    "rightQuestionId": "q28",
+    "cosineSimilarity": 0.24503232503580075
+  },
+  {
+    "leftQuestionId": "q21",
+    "rightQuestionId": "q29",
+    "cosineSimilarity": 0.26480559647978774
+  },
+  {
+    "leftQuestionId": "q21",
+    "rightQuestionId": "q30",
+    "cosineSimilarity": 0.4479650261645583
+  },
+  {
+    "leftQuestionId": "q22",
+    "rightQuestionId": "q23",
+    "cosineSimilarity": 0.5580134559681177
+  },
+  {
+    "leftQuestionId": "q22",
+    "rightQuestionId": "q24",
+    "cosineSimilarity": 0.537664486368842
+  },
+  {
+    "leftQuestionId": "q22",
+    "rightQuestionId": "q25",
+    "cosineSimilarity": 0.8881880055877199
+  },
+  {
+    "leftQuestionId": "q22",
+    "rightQuestionId": "q26",
+    "cosineSimilarity": 0.4467017203516816
+  },
+  {
+    "leftQuestionId": "q22",
+    "rightQuestionId": "q27",
+    "cosineSimilarity": 0.4153893642524207
+  },
+  {
+    "leftQuestionId": "q22",
+    "rightQuestionId": "q28",
+    "cosineSimilarity": 0.2682961960236851
+  },
+  {
+    "leftQuestionId": "q22",
+    "rightQuestionId": "q29",
+    "cosineSimilarity": 0.28101007525944566
+  },
+  {
+    "leftQuestionId": "q22",
+    "rightQuestionId": "q30",
+    "cosineSimilarity": 0.44553968960101414
+  },
+  {
+    "leftQuestionId": "q23",
+    "rightQuestionId": "q24",
+    "cosineSimilarity": 0.9321697166320235
+  },
+  {
+    "leftQuestionId": "q23",
+    "rightQuestionId": "q25",
+    "cosineSimilarity": 0.568283371937009
+  },
+  {
+    "leftQuestionId": "q23",
+    "rightQuestionId": "q26",
+    "cosineSimilarity": 0.27078181402602425
+  },
+  {
+    "leftQuestionId": "q23",
+    "rightQuestionId": "q27",
+    "cosineSimilarity": 0.2762620376931618
+  },
+  {
+    "leftQuestionId": "q23",
+    "rightQuestionId": "q28",
+    "cosineSimilarity": 0.5358214513965923
+  },
+  {
+    "leftQuestionId": "q23",
+    "rightQuestionId": "q29",
+    "cosineSimilarity": 0.5043795488345166
+  },
+  {
+    "leftQuestionId": "q23",
+    "rightQuestionId": "q30",
+    "cosineSimilarity": 0.2912952632884356
+  },
+  {
+    "leftQuestionId": "q24",
+    "rightQuestionId": "q25",
+    "cosineSimilarity": 0.5536627829368146
+  },
+  {
+    "leftQuestionId": "q24",
+    "rightQuestionId": "q26",
+    "cosineSimilarity": 0.27387861124665913
+  },
+  {
+    "leftQuestionId": "q24",
+    "rightQuestionId": "q27",
+    "cosineSimilarity": 0.27679999546978645
+  },
+  {
+    "leftQuestionId": "q24",
+    "rightQuestionId": "q28",
+    "cosineSimilarity": 0.5299803161054772
+  },
+  {
+    "leftQuestionId": "q24",
+    "rightQuestionId": "q29",
+    "cosineSimilarity": 0.5097132682283708
+  },
+  {
+    "leftQuestionId": "q24",
+    "rightQuestionId": "q30",
+    "cosineSimilarity": 0.2958892032883179
+  },
+  {
+    "leftQuestionId": "q25",
+    "rightQuestionId": "q26",
+    "cosineSimilarity": 0.43507273096034677
+  },
+  {
+    "leftQuestionId": "q25",
+    "rightQuestionId": "q27",
+    "cosineSimilarity": 0.41349381237338023
+  },
+  {
+    "leftQuestionId": "q25",
+    "rightQuestionId": "q28",
+    "cosineSimilarity": 0.2587013666259881
+  },
+  {
+    "leftQuestionId": "q25",
+    "rightQuestionId": "q29",
+    "cosineSimilarity": 0.2774182285385437
+  },
+  {
+    "leftQuestionId": "q25",
+    "rightQuestionId": "q30",
+    "cosineSimilarity": 0.46733031935541824
+  },
+  {
+    "leftQuestionId": "q26",
+    "rightQuestionId": "q27",
+    "cosineSimilarity": 0.888784888300897
+  },
+  {
+    "leftQuestionId": "q26",
+    "rightQuestionId": "q28",
+    "cosineSimilarity": 0.5414049170424438
+  },
+  {
+    "leftQuestionId": "q26",
+    "rightQuestionId": "q29",
+    "cosineSimilarity": 0.5768940667230463
+  },
+  {
+    "leftQuestionId": "q26",
+    "rightQuestionId": "q30",
+    "cosineSimilarity": 0.9813253769703912
+  },
+  {
+    "leftQuestionId": "q27",
+    "rightQuestionId": "q28",
+    "cosineSimilarity": 0.5053682961522066
+  },
+  {
+    "leftQuestionId": "q27",
+    "rightQuestionId": "q29",
+    "cosineSimilarity": 0.5650219269762649
+  },
+  {
+    "leftQuestionId": "q27",
+    "rightQuestionId": "q30",
+    "cosineSimilarity": 0.871516999333113
+  },
+  {
+    "leftQuestionId": "q28",
+    "rightQuestionId": "q29",
+    "cosineSimilarity": 0.8570646457805053
+  },
+  {
+    "leftQuestionId": "q28",
+    "rightQuestionId": "q30",
+    "cosineSimilarity": 0.5543328116981204
+  },
+  {
+    "leftQuestionId": "q29",
+    "rightQuestionId": "q30",
+    "cosineSimilarity": 0.5830898743723455
+  }
+]

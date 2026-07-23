@@ -3,7 +3,7 @@ namespace MainBackend.Models;
 public class MessageToFrontend
 {
     public Guid MessageId { get; set; }
-    public required string Content { get; set; }
+    public string? Content { get; set; }
      public List<RagSegment>? MessageSegments { get; set; }
     public bool IsVerify { get; set; }
     public DateTime? CreatedAt { get; set; }
@@ -11,5 +11,5 @@ public class MessageToFrontend
 
     // Foreign Key
     public Guid ChatId { get; set; }
-
+    public VerifiedAnswerDto? VerifiedAnswer { get; set; }
 }

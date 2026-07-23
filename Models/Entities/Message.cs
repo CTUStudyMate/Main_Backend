@@ -16,6 +16,7 @@ public class Message
     public DateTime? CreatedAt { get; set; }
     public MessageSenderType SenderType { get; set; }
 
+    public int? VerifiableQaId { get; set; }
     public VerifiableQa? VerifiableQa { get; set; }
     public Chat Chat { get; set; } = null!;
     public User? User { get; set; }

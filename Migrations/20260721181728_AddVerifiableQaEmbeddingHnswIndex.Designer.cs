@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using MainBackend.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Pgvector;
@@ -13,9 +14,11 @@ using Pgvector;
 namespace MainBackend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260721181728_AddVerifiableQaEmbeddingHnswIndex")]
+    partial class AddVerifiableQaEmbeddingHnswIndex
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -310,16 +313,11 @@ namespace MainBackend.Migrations
                     b.Property<int?>("UserId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("VerifiableQaId")
-                        .HasColumnType("integer");
-
                     b.HasKey("MessageId");
 
                     b.HasIndex("ChatId");
 
                     b.HasIndex("UserId");
-
-                    b.HasIndex("VerifiableQaId");
 
                     b.ToTable("Messages");
                 });
@@ -484,15 +482,15 @@ namespace MainBackend.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<Guid>("MessageId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("OriginalQuestion")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("RewrittenQuestion")
                         .HasColumnType("text");
-
-                    b.Property<Guid>("SourceMessageId")
-                        .HasColumnType("uuid");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -513,7 +511,7 @@ namespace MainBackend.Migrations
                     NpgsqlIndexBuilderExtensions.HasMethod(b.HasIndex("Embedding"), "hnsw");
                     NpgsqlIndexBuilderExtensions.HasOperators(b.HasIndex("Embedding"), new[] { "vector_cosine_ops" });
 
-                    b.HasIndex("SourceMessageId")
+                    b.HasIndex("MessageId")
                         .IsUnique();
 
                     b.HasIndex("UserId");
@@ -639,16 +637,9 @@ namespace MainBackend.Migrations
                         .WithMany("Messages")
                         .HasForeignKey("UserId");
 
-                    b.HasOne("MainBackend.Models.VerifiableQa", "VerifiableQa")
-                        .WithMany()
-                        .HasForeignKey("VerifiableQaId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.Navigation("Chat");
 
                     b.Navigation("User");
-
-                    b.Navigation("VerifiableQa");
                 });
 
             modelBuilder.Entity("MainBackend.Models.QuestionItem", b =>
@@ -709,9 +700,9 @@ namespace MainBackend.Migrations
 
             modelBuilder.Entity("MainBackend.Models.VerifiableQa", b =>
                 {
-                    b.HasOne("MainBackend.Models.Message", "SourceMessage")
-                        .WithOne()
-                        .HasForeignKey("MainBackend.Models.VerifiableQa", "SourceMessageId")
+                    b.HasOne("MainBackend.Models.Message", "Message")
+                        .WithOne("VerifiableQa")
+                        .HasForeignKey("MainBackend.Models.VerifiableQa", "MessageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -719,7 +710,7 @@ namespace MainBackend.Migrations
                         .WithMany()
                         .HasForeignKey("UserId");
 
-                    b.Navigation("SourceMessage");
+                    b.Navigation("Message");
 
                     b.Navigation("User");
                 });
@@ -742,6 +733,11 @@ namespace MainBackend.Migrations
             modelBuilder.Entity("MainBackend.Models.Chat", b =>
                 {
                     b.Navigation("Messages");
+                });
+
+            modelBuilder.Entity("MainBackend.Models.Message", b =>
+                {
+                    b.Navigation("VerifiableQa");
                 });
 
             modelBuilder.Entity("MainBackend.Models.QuestionItem", b =>

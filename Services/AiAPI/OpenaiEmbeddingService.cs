@@ -29,10 +29,31 @@ public class OpenaiEmbeddingService : IEmbeddingService
                 nameof(text));
         }
 
-        var response = await _embeddingClient.GenerateEmbeddingAsync(
-            text.Trim(),
-            cancellationToken: cancellationToken);
+        try
+        {
+            var response = await _embeddingClient.GenerateEmbeddingAsync(
+                text.Trim(),
+                cancellationToken: cancellationToken);
 
-        return response.Value.ToFloats().ToArray();
+            return response.Value.ToFloats().ToArray();
+        }
+        catch (HttpRequestException ex)
+        {
+            throw new InvalidOperationException(
+                "Network error while generating embedding.",
+                ex);
+        }
+        catch (TaskCanceledException ex) when (!cancellationToken.IsCancellationRequested)
+        {
+            throw new TimeoutException(
+                "Embedding request timed out.",
+                ex);
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidOperationException(
+                "Unexpected error while generating embedding.",
+                ex);
+        }
     }
 }

@@ -11,7 +11,7 @@ public enum VerifiableQaStatus
 public class VerifiableQa
 {
     public int VerifiableQaId { get; set; }
-    public Guid MessageId { get; set; }
+    public Guid SourceMessageId { get; set; }
     public int? UserId { get; set; }
     public required string OriginalQuestion { get; set; }
     public string? RewrittenQuestion { get; set; }
@@ -22,7 +22,7 @@ public class VerifiableQa
     public DateTime UpdatedAt { get; set; }
     public Vector? Embedding { get; set; }
 
-    public Message Message { get; set; } = null!;
+    public Message SourceMessage { get; set; } = null!;
     public User? User { get; set; }
     public ICollection<Course> Courses { get; set; } = new List<Course>();
     public ICollection<CuratedQa> CuratedQas { get; set; } = new List<CuratedQa>();

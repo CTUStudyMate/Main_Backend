@@ -55,6 +55,13 @@ public class AppDbContext : DbContext
             .Property(x => x.Embedding)
             .HasColumnType("vector(1536)");
 
+        modelBuilder.Entity<VerifiableQa>()
+            .HasIndex(x => x.Embedding)
+            .HasMethod("hnsw")
+            .HasOperators("vector_cosine_ops")
+            .HasStorageParameter("m", 16)
+            .HasStorageParameter("ef_construction", 64);
+
         modelBuilder.Entity<BackgroundJob>()
             .HasKey(job => job.JobId);
 
@@ -91,10 +98,6 @@ public class AppDbContext : DbContext
             .HasConversion(
                 value => ToSnakeCase(value),
                 value => ParseBackgroundJobLogEventType(value));
-
-        modelBuilder.Entity<BackgroundJobLog>()
-            .Property(x => x.Details)
-            .HasColumnType("jsonb");
 
         modelBuilder.Entity<BackgroundJobLog>()
             .HasOne(log => log.Job)
@@ -142,10 +145,16 @@ public class AppDbContext : DbContext
             .WithMany()
             .UsingEntity("VerifiableQaCourses");
 
+        modelBuilder.Entity<VerifiableQa>()
+            .HasOne(x => x.SourceMessage)
+            .WithOne()
+            .HasForeignKey<VerifiableQa>(x => x.SourceMessageId);
+
         modelBuilder.Entity<Message>()
             .HasOne(x => x.VerifiableQa)
-            .WithOne(x => x.Message)
-            .HasForeignKey<VerifiableQa>(x => x.MessageId);
+            .WithMany()
+            .HasForeignKey(x => x.VerifiableQaId)
+            .OnDelete(DeleteBehavior.Restrict);
 
         modelBuilder.Entity<Message>()
             .Property(x => x.SenderType)

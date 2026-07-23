@@ -117,7 +117,7 @@ public class VerifiableQaService : IVerifiableQaService
             SourceEntityType = BackgroundJobSourceEntityType.VerifiableQa,
             VerifiableQaId = verifiableQa.VerifiableQaId,
             AttemptCount = 0,
-            MaxAttempts = 3,
+            MaxAttempts = 5,
             CreatedAt = now,
             UpdatedAt = now
         };
@@ -146,7 +146,7 @@ public class VerifiableQaService : IVerifiableQaService
         return new PendingQa
         {
             VerifiableQaId = qa.VerifiableQaId,
-            MessageId = qa.MessageId,
+            MessageId = qa.SourceMessageId,
             UserId = qa.UserId,
             OriginalQuestion = qa.OriginalQuestion,
             RewrittenQuestion = qa.RewrittenQuestion,

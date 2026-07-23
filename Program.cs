@@ -75,6 +75,8 @@ public class Program
         {
             options.UseNpgsql(dataSource, o => o.UseVector());
         });
+        builder.Services.AddScoped<IBackgroundJobHandler, GenerateEmbeddingJobHandler>();
+        builder.Services.AddScoped<IBackgroundJobHandler, GenerateCuratedQaJobHandler>();
         builder.Services.AddHostedService<BackgroundJobWorker>();
 
         // 🔹 Services

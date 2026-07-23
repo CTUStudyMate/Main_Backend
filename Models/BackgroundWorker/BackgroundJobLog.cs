@@ -13,6 +13,7 @@ public enum BackgroundJobLogEventType
     Started,
     RetryScheduled,
     Completed,
+    SkippedDuplicate,
     Failed
 }
 

@@ -13,8 +13,9 @@ public enum BackgroundJobStatus
 {
     Pending,
     Processing,
+    RetryPending,
     Completed,
-    Failed
+    Failed,
 }
 
 public enum BackgroundJobSourceEntityType

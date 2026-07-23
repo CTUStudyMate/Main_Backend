@@ -1,0 +1,427 @@
+
+{
+  "questions": [
+    {
+      "id": "q01",
+      "text": "What is Software Engineering and how does it fit into Computer Science?"
+    },
+    {
+      "id": "q02",
+      "text": "What does software engineering involve, and what role does it play within computer science?"
+    },
+    {
+      "id": "q03",
+      "text": "Kỹ thuật phần mềm là gì và nó phù hợp như thế nào trong lĩnh vực khoa học máy tính?"
+    },
+    {
+      "id": "q04",
+      "text": "Kỹ thuật phần mềm là gì, và nó có vị trí như thế nào trong lĩnh vực khoa học máy tính?"
+    },
+    {
+      "id": "q05",
+      "text": "what is software engineering and how does it fit into computer science?"
+    },
+    {
+      "id": "q06",
+      "text": "What is unit testing and why is it important in software development?"
+    },
+    {
+      "id": "q07",
+      "text": "What does unit testing mean, and why does it matter when building software?"
+    },
+    {
+      "id": "q08",
+      "text": "Kiểm thử đơn vị là gì và tại sao nó quan trọng trong quá trình phát triển phần mềm?"
+    },
+    {
+      "id": "q09",
+      "text": "Kiểm thử đơn vị là gì, và tại sao nó quan trọng trong quá trình phát triển phần mềm?"
+    },
+    {
+      "id": "q10",
+      "text": "what is unit testing and why is it important in software development?"
+    },
+    {
+      "id": "q11",
+      "text": "What is an algorithm and why is it important in computer science?"
+    },
+    {
+      "id": "q12",
+      "text": "How would you define an algorithm, and what makes it essential to computer science?"
+    },
+    {
+      "id": "q13",
+      "text": "Thuật toán là gì và tại sao nó quan trọng trong khoa học máy tính?"
+    },
+    {
+      "id": "q14",
+      "text": "Thuật toán được định nghĩa như thế nào, và tại sao nó quan trọng trong khoa học máy tính?"
+    },
+    {
+      "id": "q15",
+      "text": "what is an algorithm and why is it important in computer science?"
+    },
+    {
+      "id": "q16",
+      "text": "How should a microservices-based e-commerce application handle distributed transactions and maintain data consistency when an order requires inventory reservation, payment processing, and shipment creation across independent services?"
+    },
+    {
+      "id": "q17",
+      "text": "What strategy should an e-commerce system built with microservices use to coordinate inventory reservation, payment, and shipment while preserving data consistency across separate services?"
+    },
+    {
+      "id": "q18",
+      "text": "Một ứng dụng thương mại điện tử dựa trên kiến trúc microservices nên xử lý các giao dịch phân tán và duy trì tính nhất quán dữ liệu như thế nào khi một đơn hàng cần đặt trước hàng tồn kho, xử lý thanh toán và tạo vận chuyển trên các dịch vụ độc lập?"
+    },
+    {
+      "id": "q19",
+      "text": "Một hệ thống thương mại điện tử sử dụng microservices nên xử lý giao dịch phân tán và duy trì tính nhất quán dữ liệu như thế nào khi một đơn hàng cần đặt trước hàng tồn kho, xử lý thanh toán và tạo vận chuyển trên các dịch vụ độc lập?"
+    },
+    {
+      "id": "q20",
+      "text": "how should a microservices-based e-commerce application handle distributed transactions and maintain data consistency when an order requires inventory reservation, payment processing, and shipment creation across independent services?"
+    },
+    {
+      "id": "q21",
+      "text": "An online learning platform experiences slow response times and intermittent database failures during peak enrollment periods. How should the engineering team investigate the root causes, redesign the data access layer, and scale the infrastructure while preserving data consistency and minimizing downtime?"
+    },
+    {
+      "id": "q22",
+      "text": "During high-enrollment periods, an online learning platform suffers from latency and occasional database outages. How should its engineering team diagnose the problem, improve data access, and scale the system without compromising consistency or causing significant downtime?"
+    },
+    {
+      "id": "q23",
+      "text": "Một nền tảng học trực tuyến gặp thời gian phản hồi chậm và lỗi cơ sở dữ liệu không liên tục trong các giai đoạn cao điểm đăng ký học. Đội ngũ kỹ thuật nên điều tra nguyên nhân gốc rễ, thiết kế lại tầng truy cập dữ liệu và mở rộng hạ tầng như thế nào trong khi vẫn bảo đảm tính nhất quán dữ liệu và giảm thiểu thời gian ngừng hoạt động?"
+    },
+    {
+      "id": "q24",
+      "text": "Trong giai đoạn cao điểm đăng ký học, một nền tảng học trực tuyến phản hồi chậm và thỉnh thoảng gặp lỗi cơ sở dữ liệu. Đội ngũ kỹ thuật nên điều tra nguyên nhân gốc rễ, thiết kế lại tầng truy cập dữ liệu và mở rộng hạ tầng như thế nào để vẫn bảo đảm tính nhất quán dữ liệu và giảm thiểu thời gian ngừng hoạt động?"
+    },
+    {
+      "id": "q25",
+      "text": "an online learning platform experiences slow response times and intermittent database failures during peak enrollment periods. how should the engineering team investigate the root causes, redesign the data access layer, and scale the infrastructure while preserving data consistency and minimizing downtime?"
+    },
+    {
+      "id": "q26",
+      "text": "A city-wide navigation platform serves millions of users who request driving routes throughout the day. The platform receives traffic updates, road closures, and accident reports every few seconds, while users expect route recommendations to be returned within a very short time. How should the system represent the road network, update routing data efficiently, choose graph algorithms and data structures for shortest-path computation, and balance route optimality, response latency, memory usage, and scalability as traffic conditions continuously change?"
+    },
+    {
+      "id": "q27",
+      "text": "A large urban navigation service must give millions of drivers route suggestions quickly while processing frequent traffic, closure, and accident updates. How should it model road data, maintain changing routing information, select graph algorithms and data structures for shortest paths, and trade off route quality, latency, memory consumption, and scalability?"
+    },
+    {
+      "id": "q28",
+      "text": "Một nền tảng điều hướng quy mô toàn thành phố phục vụ hàng triệu người dùng yêu cầu tuyến đường lái xe trong ngày. Nền tảng nhận cập nhật giao thông, thông tin đóng đường và tai nạn vài giây một lần, trong khi người dùng mong muốn nhận gợi ý tuyến đường trong thời gian rất ngắn. Hệ thống nên biểu diễn mạng lưới đường bộ, cập nhật dữ liệu định tuyến hiệu quả, chọn thuật toán đồ thị và cấu trúc dữ liệu cho việc tìm đường đi ngắn nhất, đồng thời cân bằng độ tối ưu của tuyến đường, độ trễ phản hồi, mức dùng bộ nhớ và khả năng mở rộng như thế nào?"
+    },
+    {
+      "id": "q29",
+      "text": "Một hệ thống điều hướng quy mô toàn thành phố phục vụ hàng triệu người dùng và nhận cập nhật giao thông, đóng đường cùng báo cáo tai nạn vài giây một lần nên mô hình hóa mạng lưới đường bộ, cập nhật dữ liệu định tuyến, lựa chọn thuật toán đồ thị/cấu trúc dữ liệu cho đường đi ngắn nhất, và cân bằng độ tối ưu tuyến đường, độ trễ phản hồi, bộ nhớ cùng khả năng mở rộng như thế nào?"
+    },
+    {
+      "id": "q30",
+      "text": "a city-wide navigation platform serves millions of users who request driving routes throughout the day. the platform receives traffic updates, road closures, and accident reports every few seconds, while users expect route recommendations to be returned within a very short time. how should the system represent the road network, update routing data efficiently, choose graph algorithms and data structures for shortest-path computation, and balance route optimality, response latency, memory usage, and scalability as traffic conditions continuously change?"
+    }
+  ],
+  "pairs": [
+    {
+      "leftQuestionId": "q01",
+      "rightQuestionId": "q02",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q01",
+      "rightQuestionId": "q03",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q01",
+      "rightQuestionId": "q04",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q01",
+      "rightQuestionId": "q05",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q02",
+      "rightQuestionId": "q03",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q02",
+      "rightQuestionId": "q04",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q02",
+      "rightQuestionId": "q05",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q03",
+      "rightQuestionId": "q04",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q03",
+      "rightQuestionId": "q05",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q04",
+      "rightQuestionId": "q05",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q06",
+      "rightQuestionId": "q07",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q06",
+      "rightQuestionId": "q08",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q06",
+      "rightQuestionId": "q09",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q06",
+      "rightQuestionId": "q10",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q07",
+      "rightQuestionId": "q08",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q07",
+      "rightQuestionId": "q09",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q07",
+      "rightQuestionId": "q10",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q08",
+      "rightQuestionId": "q09",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q08",
+      "rightQuestionId": "q10",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q09",
+      "rightQuestionId": "q10",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q11",
+      "rightQuestionId": "q12",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q11",
+      "rightQuestionId": "q13",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q11",
+      "rightQuestionId": "q14",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q11",
+      "rightQuestionId": "q15",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q12",
+      "rightQuestionId": "q13",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q12",
+      "rightQuestionId": "q14",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q12",
+      "rightQuestionId": "q15",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q13",
+      "rightQuestionId": "q14",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q13",
+      "rightQuestionId": "q15",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q14",
+      "rightQuestionId": "q15",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q16",
+      "rightQuestionId": "q17",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q16",
+      "rightQuestionId": "q18",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q16",
+      "rightQuestionId": "q19",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q16",
+      "rightQuestionId": "q20",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q17",
+      "rightQuestionId": "q18",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q17",
+      "rightQuestionId": "q19",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q17",
+      "rightQuestionId": "q20",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q18",
+      "rightQuestionId": "q19",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q18",
+      "rightQuestionId": "q20",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q19",
+      "rightQuestionId": "q20",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q21",
+      "rightQuestionId": "q22",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q21",
+      "rightQuestionId": "q23",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q21",
+      "rightQuestionId": "q24",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q21",
+      "rightQuestionId": "q25",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q22",
+      "rightQuestionId": "q23",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q22",
+      "rightQuestionId": "q24",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q22",
+      "rightQuestionId": "q25",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q23",
+      "rightQuestionId": "q24",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q23",
+      "rightQuestionId": "q25",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q24",
+      "rightQuestionId": "q25",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q26",
+      "rightQuestionId": "q27",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q26",
+      "rightQuestionId": "q28",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q26",
+      "rightQuestionId": "q29",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q26",
+      "rightQuestionId": "q30",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q27",
+      "rightQuestionId": "q28",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q27",
+      "rightQuestionId": "q29",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q27",
+      "rightQuestionId": "q30",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q28",
+      "rightQuestionId": "q29",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q28",
+      "rightQuestionId": "q30",
+      "expectedRelation": "duplicate"
+    },
+    {
+      "leftQuestionId": "q29",
+      "rightQuestionId": "q30",
+      "expectedRelation": "duplicate"
+    }
+  ]
+}

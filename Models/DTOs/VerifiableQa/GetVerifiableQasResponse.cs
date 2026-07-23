@@ -1,5 +1,6 @@
 namespace MainBackend.Models;
 
+// response model to frontend to display the qas in lecturer's UI
 public class GetVerifiableQasResponse
 {
     public int Total { get; set; }
