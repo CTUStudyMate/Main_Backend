@@ -2,5 +2,6 @@ namespace MainBackend.Models;
 
 public class CreateChatRequest
 {
-    public string Title { get; set; } = "";
+    public Guid ChatId { get; set; }
+    public string? TitleSource { get; set; }
 }

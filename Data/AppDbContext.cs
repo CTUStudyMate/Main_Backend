@@ -18,6 +18,7 @@ public class AppDbContext : DbContext
     public DbSet<VerifiableQa> VerifiableQas { get; set; }
     public DbSet<ReviewSession> ReviewSessions { get; set; }
     public DbSet<CuratedQa> CuratedQas { get; set; }
+    public DbSet<MatchingPair> MatchingPairs { get; set; }
     public DbSet<QuestionResponse> QuestionResponses { get; set; }
     public DbSet<QuestionItem> QuestionItems { get; set; }
     public DbSet<BackgroundJob> BackgroundJobs { get; set; }
@@ -179,6 +180,29 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<QuestionItem>()
             .Property(x => x.QuestionData)
             .HasColumnType("jsonb");
+
+        modelBuilder.Entity<MatchingPair>()
+            .HasOne(pair => pair.CuratedQa)
+            .WithMany()
+            .HasForeignKey(pair => pair.CuratedQaId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<MatchingPair>()
+            .Property(pair => pair.RelationType)
+            .HasConversion(
+                value => ToSnakeCase(value),
+                value => ParseSnakeCaseEnum<MatchingRelationType>(value));
+
+        modelBuilder.Entity<MatchingPair>()
+            .Property(pair => pair.Embedding)
+            .HasColumnType("vector(1536)");
+
+        modelBuilder.Entity<MatchingPair>()
+            .HasIndex(pair => pair.Embedding)
+            .HasMethod("hnsw")
+            .HasOperators("vector_cosine_ops")
+            .HasStorageParameter("m", 16)
+            .HasStorageParameter("ef_construction", 64);
 
         base.OnModelCreating(modelBuilder);
     }

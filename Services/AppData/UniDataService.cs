@@ -20,6 +20,14 @@ public class UniDataService : IAppDataService
             .ToListAsync();
     }
 
+    public async Task<List<Course>> GetCourses()
+    {
+        return await _db.Courses
+            .AsNoTracking()
+            .OrderBy(course => course.CourseCode)
+            .ToListAsync();
+    }
+
     public async Task<Document?> GetDocumentById(int documentId)
     {
         return await _db.Documents

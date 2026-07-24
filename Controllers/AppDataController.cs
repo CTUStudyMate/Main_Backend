@@ -28,6 +28,20 @@ public class AppDataController : ControllerBase
     }
 
     [Authorize]
+    [HttpGet("courses")]
+    public async Task<IActionResult> GetCourses()
+    {
+        var courses = await _appDataService.GetCourses();
+
+        return Ok(courses.Select(course => new
+        {
+            course.CourseId,
+            course.CourseCode,
+            course.CourseName
+        }));
+    }
+
+    [Authorize]
     [HttpGet("documents/{documentId}")]
     public async Task<IActionResult> GetDocumentById(int documentId)
     {

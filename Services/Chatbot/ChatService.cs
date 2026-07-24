@@ -8,6 +8,8 @@ namespace MainBackend.Services;
 
 public class ChatService
 {
+    public const string GeneratingTitleMarker = "[SYSTEM:GENERATING_TITLE]";
+
     private readonly AppDbContext _context;
 
     public ChatService(AppDbContext context)
@@ -15,21 +17,67 @@ public class ChatService
         _context = context;
     }
 
-    public async Task<Chat> CreateChatAsync(int userId, string title)
+    public async Task<CreateChatResult> CreateChatAsync(
+        int userId,
+        Guid chatId,
+        CancellationToken cancellationToken = default)
     {
+        var existingChat = await _context.Chats
+            .AsNoTracking()
+            .FirstOrDefaultAsync(
+                chat => chat.ChatId == chatId,
+                cancellationToken);
+
+        if (existingChat is not null)
+        {
+            return new CreateChatResult(
+                existingChat,
+                Created: false,
+                BelongsToUser: existingChat.UserId == userId);
+        }
+
+        var now = DateTime.UtcNow;
         var chat = new Chat
         {
-            ChatId = Guid.NewGuid(),
-            ChatTitle = title,
-            CreatedAt = DateTime.UtcNow,
+            ChatId = chatId,
+            ChatTitle = GeneratingTitleMarker,
+            CreatedAt = now,
             UserId = userId,
-            LastMessageAt = DateTime.UtcNow
+            LastMessageAt = now
         };
 
         _context.Chats.Add(chat);
-        await _context.SaveChangesAsync();
 
-        return chat;
+        try
+        {
+            await _context.SaveChangesAsync(cancellationToken);
+            return new CreateChatResult(
+                chat,
+                Created: true,
+                BelongsToUser: true);
+        }
+        catch (DbUpdateException)
+        {
+            // A concurrent retry can insert the same client-generated id between
+            // the read above and SaveChanges. Resolve that race as idempotency.
+            _context.Entry(chat).State = EntityState.Detached;
+
+            var concurrentlyCreatedChat = await _context.Chats
+                .AsNoTracking()
+                .FirstOrDefaultAsync(
+                    existing => existing.ChatId == chatId,
+                    cancellationToken);
+
+            if (concurrentlyCreatedChat is null)
+            {
+                throw;
+            }
+
+            return new CreateChatResult(
+                concurrentlyCreatedChat,
+                Created: false,
+                BelongsToUser: concurrentlyCreatedChat.UserId == userId);
+        }
     }
 
     public async Task<GetChatsResponse> GetChatsByUserId(int userId, GetChatsRequest request)
@@ -108,3 +156,8 @@ public class ChatService
     }
 
 }
+
+public sealed record CreateChatResult(
+    Chat Chat,
+    bool Created,
+    bool BelongsToUser);

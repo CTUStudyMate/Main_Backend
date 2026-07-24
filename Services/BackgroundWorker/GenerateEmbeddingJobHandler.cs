@@ -25,7 +25,7 @@ public class GenerateEmbeddingJobHandler : IBackgroundJobHandler
 
     public async Task HandleAsync(BackgroundJob job, CancellationToken cancellationToken, AppDbContext db)
     {
-        var now = DateTime.UtcNow;
+        var timeline = new BackgroundJobTimestampSequence();
         var verifiableQa = await db.VerifiableQas
             .FirstOrDefaultAsync(
                 v => v.VerifiableQaId == job.VerifiableQaId,
@@ -34,6 +34,10 @@ public class GenerateEmbeddingJobHandler : IBackgroundJobHandler
 
         if (verifiableQa is null)
         {
+            job.Status = BackgroundJobStatus.Failed;
+            job.UpdatedAt = timeline.Next();
+            job.CompletedAt = timeline.Next();
+
             db.BackgroundJobLogs.Add(new BackgroundJobLog
             {
                 BackgroundJobLogId = Guid.NewGuid(),
@@ -42,11 +46,8 @@ public class GenerateEmbeddingJobHandler : IBackgroundJobHandler
                 EventType = BackgroundJobLogEventType.Failed,
                 AttemptNumber = job.AttemptCount,
                 Message = $"FAILED: Background job {job.JobId}: The job is generating embedding for a verifiable qa but no qa provided.",
-                CreatedAt = now
+                CreatedAt = timeline.Next()
             });
-            job.UpdatedAt = now;
-            job.Status = BackgroundJobStatus.Failed;
-            job.CompletedAt = now;
             await db.SaveChangesAsync(cancellationToken);
             return;
         }
@@ -55,6 +56,10 @@ public class GenerateEmbeddingJobHandler : IBackgroundJobHandler
         {
             if (string.IsNullOrWhiteSpace(verifiableQa.OriginalQuestion))
             {
+                job.Status = BackgroundJobStatus.Failed;
+                job.UpdatedAt = timeline.Next();
+                job.CompletedAt = timeline.Next();
+
                 db.BackgroundJobLogs.Add(new BackgroundJobLog
                 {
                     BackgroundJobLogId = Guid.NewGuid(),
@@ -63,11 +68,8 @@ public class GenerateEmbeddingJobHandler : IBackgroundJobHandler
                     EventType = BackgroundJobLogEventType.Failed,
                     AttemptNumber = job.AttemptCount,
                     Message = $"FAILED: Background job {job.JobId}: The job is generating embedding for a verifiable qa but qa has no question.",
-                    CreatedAt = now
+                    CreatedAt = timeline.Next()
                 });
-                job.UpdatedAt = now;
-                job.Status = BackgroundJobStatus.Failed;
-                job.CompletedAt = now;
                 await db.SaveChangesAsync(cancellationToken);
                 return;
             }
@@ -83,9 +85,9 @@ public class GenerateEmbeddingJobHandler : IBackgroundJobHandler
         if (matchQA is not null)
         {
             job.Status = BackgroundJobStatus.Completed;
-            job.UpdatedAt = now;
+            job.UpdatedAt = timeline.Next();
             job.NextAttemptAt = null;
-            job.CompletedAt = now;
+            job.CompletedAt = timeline.Next();
 
             db.BackgroundJobLogs.Add(new BackgroundJobLog
             {
@@ -96,7 +98,7 @@ public class GenerateEmbeddingJobHandler : IBackgroundJobHandler
                 AttemptNumber = job.AttemptCount,
                 Message = $"Background job {job.JobId} skipped because it matches VerifiableQa {matchQA.VerifiableQa.VerifiableQaId}.",
                 Details = $"Cosine similarity: {matchQA.Similarity:F6}; threshold: {DuplicateSimilarityThreshold:F2}.",
-                CreatedAt = now
+                CreatedAt = timeline.Next()
             });
 
             await db.SaveChangesAsync(cancellationToken);
@@ -109,9 +111,9 @@ public class GenerateEmbeddingJobHandler : IBackgroundJobHandler
         verifiableQa.Embedding = new Vector(embeddedContent);
 
         job.Status = BackgroundJobStatus.Completed;
-        job.UpdatedAt = now;
+        job.UpdatedAt = timeline.Next();
         job.NextAttemptAt = null;
-        job.CompletedAt = now;
+        job.CompletedAt = timeline.Next();
 
         db.BackgroundJobLogs.Add(new BackgroundJobLog
         {
@@ -121,20 +123,22 @@ public class GenerateEmbeddingJobHandler : IBackgroundJobHandler
             EventType = BackgroundJobLogEventType.Completed,
             AttemptNumber = job.AttemptCount,
             Message = $"Background job {job.JobId} completed: {job.Type}",
-            CreatedAt = DateTime.UtcNow
+            CreatedAt = timeline.Next()
         });
+
+        var curatedQaJobCreatedAt = timeline.Next();
 
         var curatedQaJob = new BackgroundJob
         {
             AttemptCount = 0,
-            CreatedAt = now,
+            CreatedAt = curatedQaJobCreatedAt,
             JobId = Guid.NewGuid(),
             MaxAttempts = 5,
             SourceEntityType = BackgroundJobSourceEntityType.VerifiableQa,
             VerifiableQaId = job.VerifiableQaId,
             Status = BackgroundJobStatus.Pending,
             Type = BackgroundJobType.GenerateCuratedQa,
-            UpdatedAt = now,
+            UpdatedAt = curatedQaJobCreatedAt,
         };
         db.BackgroundJobs.Add(curatedQaJob);
 
@@ -146,7 +150,7 @@ public class GenerateEmbeddingJobHandler : IBackgroundJobHandler
             EventType = BackgroundJobLogEventType.JobCreated,
             AttemptNumber = 0,
             Message = $"Background job created: {BackgroundJobType.GenerateCuratedQa} for VerifiableQa {job.VerifiableQaId}.",
-            CreatedAt = now
+            CreatedAt = timeline.Next()
         });
         await db.SaveChangesAsync(cancellationToken);
 

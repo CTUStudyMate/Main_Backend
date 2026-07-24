@@ -1,0 +1,30 @@
+using MainBackend.Models;
+
+namespace MainBackend.Services;
+
+public interface ICuratedQaExerciseDashboardService
+{
+    Task<List<LecturerCuratedQaItem>> GetCuratedQasAsync(
+        int userId,
+        CancellationToken cancellationToken = default);
+
+    Task<List<LecturerExerciseItem>> GetExercisesAsync(
+        int userId,
+        CancellationToken cancellationToken = default);
+
+    Task<List<AdminDashboardUserItem>> GetUsersAsync(
+        CancellationToken cancellationToken = default);
+
+    Task<List<AdminSystemDocumentItem>> GetSystemDocumentsAsync(
+        CancellationToken cancellationToken = default);
+
+    Task<AdminSystemDocumentItem> UpdateSystemDocumentAsync(
+        int documentId,
+        AdminUpdateSystemDocumentRequest request,
+        CancellationToken cancellationToken = default);
+
+    Task<AdminSystemDocumentItem> UpdateSystemDocumentVisibilityAsync(
+        int documentId,
+        DocumentVisibility visibility,
+        CancellationToken cancellationToken = default);
+}

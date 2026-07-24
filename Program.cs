@@ -4,6 +4,7 @@ using MainBackend.Services;
 using MainBackend.Models;
 using MainBackend.Configurations;
 using MainBackend.Services.BackgroundWorker;
+using MainBackend.Services.RagEngine;
 using Npgsql;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -11,6 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Pgvector.EntityFrameworkCore;
 using MainBackend.Data.Seeders;
+using MainBackend.Services.ChatTitleGeneration;
 
 
 namespace MainBackend;
@@ -77,7 +79,10 @@ public class Program
         });
         builder.Services.AddScoped<IBackgroundJobHandler, GenerateEmbeddingJobHandler>();
         builder.Services.AddScoped<IBackgroundJobHandler, GenerateCuratedQaJobHandler>();
+        builder.Services.AddScoped<IBackgroundJobHandler, GenerateExercisesJobHandler>();
         builder.Services.AddHostedService<BackgroundJobWorker>();
+        builder.Services.AddSingleton<IChatTitleJobQueue, ChatTitleJobQueue>();
+        builder.Services.AddHostedService<ChatTitleGenerationWorker>();
 
         // 🔹 Services
         builder.Services
@@ -106,15 +111,21 @@ public class Program
             };
         });
         builder.Services.AddHttpClient();
+        builder.Services.AddHttpClient<ExerciseGenerationRagClient>();
+        builder.Services.AddHttpClient<IChatTitleGenerator, ChatTitleRagClient>();
         builder.Services.AddScoped<IJwtService, JwtService>();
         builder.Services.AddScoped<IAuthService, AuthService>();
         builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
         builder.Services.AddScoped<UserService>();
         builder.Services.AddScoped<ChatService>();
         builder.Services.AddScoped<MessageService>();
+        builder.Services.AddScoped<ReviewService>();
         builder.Services.AddScoped<IAppDataService, UniDataService>();
         builder.Services.AddScoped<DocumentDataService>();
         builder.Services.AddScoped<IVerifiableQaService, VerifiableQaService>();
+        builder.Services.AddScoped<
+            ICuratedQaExerciseDashboardService,
+            CuratedQaExerciseDashboardService>();
 
         var app = builder.Build();
 

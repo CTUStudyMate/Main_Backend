@@ -65,9 +65,11 @@ public class BackgroundJobWorker : BackgroundService
                     continue;
                 }
 
+                var timeline = new BackgroundJobTimestampSequence();
+
                 job.Status = BackgroundJobStatus.Processing;
                 job.AttemptCount++;
-                job.UpdatedAt = now;
+                job.UpdatedAt = timeline.Next();
 
                 jobDb.BackgroundJobLogs.Add(new BackgroundJobLog
                 {
@@ -81,7 +83,7 @@ public class BackgroundJobWorker : BackgroundService
                         $"{(job.VerifiableQaId.HasValue
                             ? job.VerifiableQaId.Value
                             : job.CuratedQaId)}",
-                    CreatedAt = now
+                    CreatedAt = timeline.Next()
                 });
                 await jobDb.SaveChangesAsync(stoppingToken);
 
@@ -130,11 +132,12 @@ public class BackgroundJobWorker : BackgroundService
         }
 
         var now = DateTime.UtcNow;
+        var timeline = new BackgroundJobTimestampSequence();
         if (job.AttemptCount < job.MaxAttempts)
         {
             var delayIndex = Math.Min(job.AttemptCount - 1, ErrorRetryDelays.Length - 1);
             job.Status = BackgroundJobStatus.RetryPending;
-            job.UpdatedAt = now;
+            job.UpdatedAt = timeline.Next();
             job.NextAttemptAt = now + ErrorRetryDelays[delayIndex];
 
             retryDb.BackgroundJobLogs.Add(new BackgroundJobLog
@@ -146,15 +149,15 @@ public class BackgroundJobWorker : BackgroundService
                 AttemptNumber = job.AttemptCount,
                 Message = $"Background job {job.JobId} failed. Next retry at {job.NextAttemptAt}.",
                 Details = exception.ToString(),
-                CreatedAt = now
+                CreatedAt = timeline.Next()
             });
         }
         else
         {
             job.Status = BackgroundJobStatus.Failed;
-            job.UpdatedAt = now;
+            job.UpdatedAt = timeline.Next();
             job.NextAttemptAt = null;
-            job.CompletedAt = now;
+            job.CompletedAt = timeline.Next();
 
             retryDb.BackgroundJobLogs.Add(new BackgroundJobLog
             {
@@ -165,7 +168,7 @@ public class BackgroundJobWorker : BackgroundService
                 AttemptNumber = job.AttemptCount,
                 Message = $"Background job {job.JobId} failed after all attempts.",
                 Details = exception.ToString(),
-                CreatedAt = now
+                CreatedAt = timeline.Next()
             });
         }
 

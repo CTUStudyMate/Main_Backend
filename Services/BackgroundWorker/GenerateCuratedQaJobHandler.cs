@@ -103,6 +103,7 @@ public class GenerateCuratedQaJobHandler : IBackgroundJobHandler
         //            complete current job, log
         //            create jobs generating excercises for each qa and log for each job
 
+        var timeline = new BackgroundJobTimestampSequence();
         var curatedQas = new List<CuratedQa>();
 
         foreach (var qa in curatedQaBatch.CuratedQas)
@@ -111,7 +112,7 @@ public class GenerateCuratedQaJobHandler : IBackgroundJobHandler
             {
                 CuratedQuestion = qa.Question,
                 CuratedAnswer = qa.Answer,
-                CreatedAt = DateTime.UtcNow,
+                CreatedAt = timeline.Next(),
                 VerifiableQaId = verifiableQa.VerifiableQaId
             };
 
@@ -119,12 +120,10 @@ public class GenerateCuratedQaJobHandler : IBackgroundJobHandler
             db.CuratedQas.Add(curatedQa);
         }
 
-        var now = DateTime.UtcNow;
-
         job.Status = BackgroundJobStatus.Completed;
-        job.UpdatedAt = now;
+        job.UpdatedAt = timeline.Next();
         job.NextAttemptAt = null;
-        job.CompletedAt = now;
+        job.CompletedAt = timeline.Next();
 
         db.BackgroundJobLogs.Add(new BackgroundJobLog
         {
@@ -135,13 +134,15 @@ public class GenerateCuratedQaJobHandler : IBackgroundJobHandler
             AttemptNumber = job.AttemptCount,
             Message = $"Background job {job.JobId} completed: {job.Type}. " +
                       $"Created {curatedQas.Count} curated QAs for VerifiableQa {verifiableQa.VerifiableQaId}.",
-            CreatedAt = now
+            CreatedAt = timeline.Next()
         });
 
         await db.SaveChangesAsync(cancellationToken);
 
         foreach (var curatedQa in curatedQas)
         {
+            var exerciseJobCreatedAt = timeline.Next();
+
             var exerciseJob = new BackgroundJob
             {
                 JobId = Guid.NewGuid(),
@@ -151,8 +152,8 @@ public class GenerateCuratedQaJobHandler : IBackgroundJobHandler
                 CuratedQaId = curatedQa.CuratedQaId,
                 AttemptCount = 0,
                 MaxAttempts = 5,
-                CreatedAt = now,
-                UpdatedAt = now
+                CreatedAt = exerciseJobCreatedAt,
+                UpdatedAt = exerciseJobCreatedAt
             };
 
             db.BackgroundJobs.Add(exerciseJob);
@@ -164,7 +165,7 @@ public class GenerateCuratedQaJobHandler : IBackgroundJobHandler
                 EventType = BackgroundJobLogEventType.JobCreated,
                 AttemptNumber = exerciseJob.AttemptCount,
                 Message = $"Generate exercises job created for CuratedQa {curatedQa.CuratedQaId}.",
-                CreatedAt = now
+                CreatedAt = timeline.Next()
             });
         }
 
