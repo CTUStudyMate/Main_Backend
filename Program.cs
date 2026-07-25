@@ -75,7 +75,14 @@ public class Program
         // );
         builder.Services.AddDbContext<AppDbContext>(options =>
         {
-            options.UseNpgsql(dataSource, o => o.UseVector());
+            options.UseNpgsql(dataSource, postgresOptions =>
+            {
+                postgresOptions.UseVector();
+                postgresOptions.EnableRetryOnFailure(
+                    maxRetryCount: 5,
+                    maxRetryDelay: TimeSpan.FromSeconds(10),
+                    errorCodesToAdd: null);
+            });
         });
         builder.Services.AddScoped<IBackgroundJobHandler, GenerateEmbeddingJobHandler>();
         builder.Services.AddScoped<IBackgroundJobHandler, GenerateCuratedQaJobHandler>();
@@ -117,6 +124,7 @@ public class Program
         builder.Services.AddScoped<IAuthService, AuthService>();
         builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
         builder.Services.AddScoped<UserService>();
+        builder.Services.AddSingleton<DocumentStorageService>();
         builder.Services.AddScoped<ChatService>();
         builder.Services.AddScoped<MessageService>();
         builder.Services.AddScoped<ReviewService>();

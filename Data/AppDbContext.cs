@@ -46,6 +46,12 @@ public class AppDbContext : DbContext
                 visibility => visibility.ToString().ToLower(),
                 visibility => Enum.Parse<DocumentVisibility>(visibility, true));
 
+        modelBuilder.Entity<Document>()
+            .Property(x => x.ProcessingStatus)
+            .HasConversion(
+                status => ToSnakeCase(status),
+                status => ParseSnakeCaseEnum<DocumentProcessingStatus>(status));
+
         modelBuilder.Entity<VerifiableQa>()
             .Property(x => x.Status)
             .HasConversion(
