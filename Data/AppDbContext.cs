@@ -157,6 +157,12 @@ public class AppDbContext : DbContext
             .WithOne()
             .HasForeignKey<VerifiableQa>(x => x.SourceMessageId);
 
+        modelBuilder.Entity<VerifiableQa>()
+            .HasOne(x => x.ApprovedByUser)
+            .WithMany()
+            .HasForeignKey(x => x.ApprovedByUserId)
+            .OnDelete(DeleteBehavior.SetNull);
+
         modelBuilder.Entity<Message>()
             .HasOne(x => x.VerifiableQa)
             .WithMany()

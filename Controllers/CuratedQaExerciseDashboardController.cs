@@ -51,6 +51,46 @@ public class CuratedQaExerciseDashboardController : ControllerBase
         return Ok(exercises);
     }
 
+    [HttpPatch("curated-qas/{curatedQaId:int}/enabled")]
+    public async Task<IActionResult> UpdateCuratedQaEnabled(
+        int curatedQaId,
+        [FromBody] UpdateCuratedQaEnabledRequest request,
+        CancellationToken cancellationToken)
+    {
+        if (!TryGetAuthenticatedUserId(out var userId))
+        {
+            return Unauthorized();
+        }
+
+        var curatedQa = await _dashboardService.UpdateCuratedQaEnabledAsync(
+            userId,
+            curatedQaId,
+            request.IsEnabled,
+            cancellationToken);
+
+        return Ok(curatedQa);
+    }
+
+    [HttpPatch("exercises/{questionItemId:guid}/enabled")]
+    public async Task<IActionResult> UpdateExerciseEnabled(
+        Guid questionItemId,
+        [FromBody] UpdateExerciseEnabledRequest request,
+        CancellationToken cancellationToken)
+    {
+        if (!TryGetAuthenticatedUserId(out var userId))
+        {
+            return Unauthorized();
+        }
+
+        var exercise = await _dashboardService.UpdateExerciseEnabledAsync(
+            userId,
+            questionItemId,
+            request.IsEnabled,
+            cancellationToken);
+
+        return Ok(exercise);
+    }
+
     [HttpGet("users")]
     [Authorize(Roles = "admin")]
     public async Task<IActionResult> GetUsers(
@@ -58,6 +98,34 @@ public class CuratedQaExerciseDashboardController : ControllerBase
     {
         var users = await _dashboardService.GetUsersAsync(cancellationToken);
         return Ok(users);
+    }
+
+    [HttpPut("users/{userId:int}")]
+    [Authorize(Roles = "admin")]
+    public async Task<IActionResult> UpdateUser(
+        int userId,
+        [FromBody] AdminUpdateUserRequest request,
+        CancellationToken cancellationToken)
+    {
+        var user = await _dashboardService.UpdateUserAsync(
+            userId,
+            request,
+            cancellationToken);
+        return Ok(user);
+    }
+
+    [HttpPatch("users/{userId:int}/status")]
+    [Authorize(Roles = "admin")]
+    public async Task<IActionResult> UpdateUserStatus(
+        int userId,
+        [FromBody] AdminUpdateUserStatusRequest request,
+        CancellationToken cancellationToken)
+    {
+        var user = await _dashboardService.UpdateUserStatusAsync(
+            userId,
+            request.AccountStatus,
+            cancellationToken);
+        return Ok(user);
     }
 
     [HttpGet("system-documents")]

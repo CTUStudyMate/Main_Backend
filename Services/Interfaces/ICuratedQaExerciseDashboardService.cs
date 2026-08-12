@@ -12,7 +12,29 @@ public interface ICuratedQaExerciseDashboardService
         int userId,
         CancellationToken cancellationToken = default);
 
+    Task<LecturerCuratedQaItem> UpdateCuratedQaEnabledAsync(
+        int userId,
+        int curatedQaId,
+        bool isEnabled,
+        CancellationToken cancellationToken = default);
+
+    Task<LecturerExerciseItem> UpdateExerciseEnabledAsync(
+        int userId,
+        Guid questionItemId,
+        bool isEnabled,
+        CancellationToken cancellationToken = default);
+
     Task<List<AdminDashboardUserItem>> GetUsersAsync(
+        CancellationToken cancellationToken = default);
+
+    Task<AdminDashboardUserItem> UpdateUserAsync(
+        int userId,
+        AdminUpdateUserRequest request,
+        CancellationToken cancellationToken = default);
+
+    Task<AdminDashboardUserItem> UpdateUserStatusAsync(
+        int userId,
+        string accountStatus,
         CancellationToken cancellationToken = default);
 
     Task<List<AdminSystemDocumentItem>> GetSystemDocumentsAsync(

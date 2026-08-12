@@ -9,6 +9,7 @@ using Npgsql;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 using System.Text;
 using Pgvector.EntityFrameworkCore;
 using MainBackend.Data.Seeders;
@@ -102,6 +103,26 @@ public class Program
                 {
                     context.Token = context.Request.Cookies["access_token"];
                     return Task.CompletedTask;
+                },
+                OnTokenValidated = async context =>
+                {
+                    if (!int.TryParse(
+                            context.Principal?.FindFirst(ClaimTypes.NameIdentifier)?.Value,
+                            out var userId))
+                    {
+                        context.Fail("Missing user id.");
+                        return;
+                    }
+
+                    var db = context.HttpContext.RequestServices
+                        .GetRequiredService<AppDbContext>();
+                    var isActive = await db.Users.AnyAsync(
+                        user => user.UserId == userId &&
+                            user.AccountStatus.ToLower() == "active");
+                    if (!isActive)
+                    {
+                        context.Fail("Account is locked.");
+                    }
                 }
             };
 
@@ -119,6 +140,7 @@ public class Program
         });
         builder.Services.AddHttpClient();
         builder.Services.AddHttpClient<ExerciseGenerationRagClient>();
+        builder.Services.AddHttpClient<DocumentRagClient>();
         builder.Services.AddHttpClient<IChatTitleGenerator, ChatTitleRagClient>();
         builder.Services.AddScoped<IJwtService, JwtService>();
         builder.Services.AddScoped<IAuthService, AuthService>();

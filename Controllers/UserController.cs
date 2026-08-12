@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using MainBackend.Services;
 using MainBackend.Models;
 
 namespace MainBackend.Controllers;
 
 [ApiController]
+[Authorize(Roles = "admin")]
 [Route("api/users")]
 public class UserController: ControllerBase
 {
@@ -15,9 +17,11 @@ public class UserController: ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateUser(CreateUserRequest request)
+    public async Task<IActionResult> CreateUser(
+        [FromBody] CreateUserRequest request,
+        CancellationToken cancellationToken)
     {
-        var user = await _userService.CreateUserAsync(request);
+        var user = await _userService.CreateUserAsync(request, cancellationToken);
         return Ok(new CreateUserResponse
         {
             Name = user.Name,

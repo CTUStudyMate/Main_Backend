@@ -1,5 +1,6 @@
 using System.Text.Json;
 using MainBackend.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace MainBackend.Services;
@@ -7,10 +8,14 @@ namespace MainBackend.Services;
 public class CuratedQaExerciseDashboardService : ICuratedQaExerciseDashboardService
 {
     private readonly AppDbContext _db;
+    private readonly IPasswordHasher<User> _passwordHasher;
 
-    public CuratedQaExerciseDashboardService(AppDbContext db)
+    public CuratedQaExerciseDashboardService(
+        AppDbContext db,
+        IPasswordHasher<User> passwordHasher)
     {
         _db = db;
+        _passwordHasher = passwordHasher;
     }
 
     public async Task<List<LecturerCuratedQaItem>> GetCuratedQasAsync(
@@ -29,7 +34,9 @@ public class CuratedQaExerciseDashboardService : ICuratedQaExerciseDashboardServ
         IQueryable<CuratedQa> curatedQaQuery = _db.CuratedQas
             .AsNoTracking()
             .Include(curatedQa => curatedQa.VerifiableQa)
-                .ThenInclude(verifiableQa => verifiableQa.Courses);
+                .ThenInclude(verifiableQa => verifiableQa.Courses)
+            .Include(curatedQa => curatedQa.VerifiableQa)
+                .ThenInclude(verifiableQa => verifiableQa.ApprovedByUser);
 
         if (!access.IsAdmin)
         {
@@ -43,26 +50,22 @@ public class CuratedQaExerciseDashboardService : ICuratedQaExerciseDashboardServ
             .ThenByDescending(curatedQa => curatedQa.CuratedQaId)
             .ToListAsync(cancellationToken);
 
-        var curatedQaIds = curatedQas
-            .Select(curatedQa => curatedQa.CuratedQaId)
-            .ToList();
-
-        var exerciseStats = await _db.QuestionItems
+        var curatedQaIds = curatedQas.Select(curatedQa => curatedQa.CuratedQaId).ToList();
+        var exerciseCounts = await _db.QuestionItems
             .AsNoTracking()
             .Where(questionItem => curatedQaIds.Contains(questionItem.CuratedQaId))
             .GroupBy(questionItem => questionItem.CuratedQaId)
             .Select(group => new
             {
                 CuratedQaId = group.Key,
-                Count = group.Count(),
-                IsEnabled = group.Any(questionItem => questionItem.IsEnabled)
+                Count = group.Count()
             })
             .ToDictionaryAsync(item => item.CuratedQaId, cancellationToken);
 
         return curatedQas
             .Select(curatedQa =>
             {
-                exerciseStats.TryGetValue(curatedQa.CuratedQaId, out var stats);
+                exerciseCounts.TryGetValue(curatedQa.CuratedQaId, out var stats);
 
                 return new LecturerCuratedQaItem
                 {
@@ -70,15 +73,83 @@ public class CuratedQaExerciseDashboardService : ICuratedQaExerciseDashboardServ
                     VerifiableQaId = curatedQa.VerifiableQaId,
                     CuratedQuestion = curatedQa.CuratedQuestion,
                     CuratedAnswer = curatedQa.CuratedAnswer,
+                    VerifiableQuestion = curatedQa.VerifiableQa.RewrittenQuestion
+                        ?? curatedQa.VerifiableQa.OriginalQuestion,
+                    ApprovedAnswer = curatedQa.VerifiableQa.ApprovedAnswer,
+                    ApprovedByName = curatedQa.VerifiableQa.ApprovedByUser?.Name,
                     CreatedAt = curatedQa.CreatedAt,
                     ExerciseCount = stats?.Count ?? 0,
-                    IsEnabled = stats?.IsEnabled ?? false,
+                    IsEnabled = curatedQa.IsEnabled,
                     Courses = MapCourses(
                         curatedQa.VerifiableQa.Courses,
                         access.IsAdmin ? null : access.CourseIds)
                 };
             })
             .ToList();
+    }
+
+    public async Task<LecturerCuratedQaItem> UpdateCuratedQaEnabledAsync(
+        int userId,
+        int curatedQaId,
+        bool isEnabled,
+        CancellationToken cancellationToken = default)
+    {
+        var access = await GetDashboardAccessAsync(userId, cancellationToken);
+        var curatedQa = await _db.CuratedQas
+            .Include(item => item.VerifiableQa)
+                .ThenInclude(item => item.Courses)
+            .Include(item => item.VerifiableQa)
+                .ThenInclude(item => item.ApprovedByUser)
+            .FirstOrDefaultAsync(
+                item => item.CuratedQaId == curatedQaId,
+                cancellationToken);
+
+        if (curatedQa is null)
+        {
+            throw new KeyNotFoundException("Curated QA not found.");
+        }
+
+        if (!access.IsAdmin && !curatedQa.VerifiableQa.Courses.Any(
+                course => access.CourseIds.Contains(course.CourseId)))
+        {
+            throw new UnauthorizedAccessException(
+                "You are not assigned to a course containing this curated QA.");
+        }
+
+        curatedQa.IsEnabled = isEnabled;
+        var questionItems = await _db.QuestionItems
+            .Where(item => item.CuratedQaId == curatedQaId)
+            .ToListAsync(cancellationToken);
+
+        foreach (var questionItem in questionItems)
+        {
+            questionItem.IsEnabled = isEnabled;
+        }
+
+        await _db.SaveChangesAsync(cancellationToken);
+
+        var exerciseCount = await _db.QuestionItems
+            .CountAsync(
+                item => item.CuratedQaId == curatedQaId,
+                cancellationToken);
+
+        return new LecturerCuratedQaItem
+        {
+            CuratedQaId = curatedQa.CuratedQaId,
+            VerifiableQaId = curatedQa.VerifiableQaId,
+            CuratedQuestion = curatedQa.CuratedQuestion,
+            CuratedAnswer = curatedQa.CuratedAnswer,
+            VerifiableQuestion = curatedQa.VerifiableQa.RewrittenQuestion
+                ?? curatedQa.VerifiableQa.OriginalQuestion,
+            ApprovedAnswer = curatedQa.VerifiableQa.ApprovedAnswer,
+            ApprovedByName = curatedQa.VerifiableQa.ApprovedByUser?.Name,
+            CreatedAt = curatedQa.CreatedAt,
+            ExerciseCount = exerciseCount,
+            IsEnabled = curatedQa.IsEnabled,
+            Courses = MapCourses(
+                curatedQa.VerifiableQa.Courses,
+                access.IsAdmin ? null : access.CourseIds)
+        };
     }
 
     public async Task<List<LecturerExerciseItem>> GetExercisesAsync(
@@ -131,6 +202,51 @@ public class CuratedQaExerciseDashboardService : ICuratedQaExerciseDashboardServ
             .ToList();
     }
 
+    public async Task<LecturerExerciseItem> UpdateExerciseEnabledAsync(
+        int userId,
+        Guid questionItemId,
+        bool isEnabled,
+        CancellationToken cancellationToken = default)
+    {
+        var access = await GetDashboardAccessAsync(userId, cancellationToken);
+        var questionItem = await _db.QuestionItems
+            .Include(item => item.CuratedQa)
+                .ThenInclude(item => item.VerifiableQa)
+                    .ThenInclude(item => item.Courses)
+            .FirstOrDefaultAsync(
+                item => item.QuestionItemId == questionItemId,
+                cancellationToken);
+
+        if (questionItem is null)
+        {
+            throw new KeyNotFoundException("Exercise not found.");
+        }
+
+        if (!access.IsAdmin && !questionItem.CuratedQa.VerifiableQa.Courses.Any(
+                course => access.CourseIds.Contains(course.CourseId)))
+        {
+            throw new UnauthorizedAccessException(
+                "You are not assigned to a course containing this exercise.");
+        }
+
+        questionItem.IsEnabled = isEnabled;
+        await _db.SaveChangesAsync(cancellationToken);
+
+        return new LecturerExerciseItem
+        {
+            QuestionItemId = questionItem.QuestionItemId,
+            CuratedQaId = questionItem.CuratedQaId,
+            CuratedQuestion = questionItem.CuratedQa.CuratedQuestion,
+            Type = JsonNamingPolicy.CamelCase.ConvertName(questionItem.Type.ToString()),
+            QuestionData = JsonSerializer.Deserialize<JsonElement>(questionItem.QuestionData),
+            IsEnabled = questionItem.IsEnabled,
+            CreatedAt = questionItem.CreatedAt,
+            Courses = MapCourses(
+                questionItem.CuratedQa.VerifiableQa.Courses,
+                access.IsAdmin ? null : access.CourseIds)
+        };
+    }
+
     public async Task<List<AdminDashboardUserItem>> GetUsersAsync(
         CancellationToken cancellationToken = default)
     {
@@ -167,6 +283,109 @@ public class CuratedQaExerciseDashboardService : ICuratedQaExerciseDashboardServ
                     .ToList()
             })
             .ToList();
+    }
+
+    public async Task<AdminDashboardUserItem> UpdateUserAsync(
+        int userId,
+        AdminUpdateUserRequest request,
+        CancellationToken cancellationToken = default)
+    {
+        if (string.IsNullOrWhiteSpace(request.Name) ||
+            string.IsNullOrWhiteSpace(request.Email))
+        {
+            throw new ArgumentException("Name and email are required.");
+        }
+
+        if (!Enum.TryParse<UserRole>(request.Role, true, out var role))
+        {
+            throw new ArgumentException("Invalid role.");
+        }
+
+        var user = await _db.Users
+            .Include(item => item.Major)
+            .Include(item => item.Courses)
+            .FirstOrDefaultAsync(item => item.UserId == userId, cancellationToken);
+        if (user is null)
+        {
+            throw new KeyNotFoundException("User not found.");
+        }
+
+        var email = request.Email.Trim();
+        var emailInUse = await _db.Users.AnyAsync(
+            item => item.UserId != userId && item.Email == email,
+            cancellationToken);
+        if (emailInUse)
+        {
+            throw new ArgumentException("Email is already in use.");
+        }
+
+        if ((role is UserRole.Student or UserRole.Lecturer) &&
+            request.MajorId.HasValue)
+        {
+            var majorExists = await _db.Majors.AnyAsync(
+                item => item.MajorId == request.MajorId.Value,
+                cancellationToken);
+            if (!majorExists)
+            {
+                throw new ArgumentException("Selected major does not exist.");
+            }
+        }
+
+        var courseIds = role == UserRole.Lecturer
+            ? request.CourseIds.Distinct().ToList()
+            : [];
+        var courses = await _db.Courses
+            .Where(course => courseIds.Contains(course.CourseId))
+            .ToListAsync(cancellationToken);
+        if (courses.Count != courseIds.Count)
+        {
+            throw new ArgumentException("One or more selected courses do not exist.");
+        }
+
+        user.Name = request.Name.Trim();
+        user.Email = email;
+        user.Role = role;
+        user.MajorId = role is UserRole.Student or UserRole.Lecturer
+            ? request.MajorId
+            : null;
+        user.Courses.Clear();
+        foreach (var course in courses)
+        {
+            user.Courses.Add(course);
+        }
+
+        if (!string.IsNullOrWhiteSpace(request.NewPassword))
+        {
+            user.Password = _passwordHasher.HashPassword(user, request.NewPassword);
+        }
+
+        await _db.SaveChangesAsync(cancellationToken);
+        return MapUser(user);
+    }
+
+    public async Task<AdminDashboardUserItem> UpdateUserStatusAsync(
+        int userId,
+        string accountStatus,
+        CancellationToken cancellationToken = default)
+    {
+        var normalizedStatus = accountStatus.Trim().ToLowerInvariant();
+        if (normalizedStatus is not "active" and not "suspended")
+        {
+            throw new ArgumentException("Account status must be active or suspended.");
+        }
+
+        var user = await _db.Users
+            .Include(item => item.Major)
+            .Include(item => item.Courses)
+            .FirstOrDefaultAsync(item => item.UserId == userId, cancellationToken);
+        if (user is null)
+        {
+            throw new KeyNotFoundException("User not found.");
+        }
+
+        user.AccountStatus = normalizedStatus;
+        await _db.SaveChangesAsync(cancellationToken);
+        return MapUser(user);
     }
 
     public async Task<List<AdminSystemDocumentItem>> GetSystemDocumentsAsync(
@@ -311,11 +530,32 @@ public class CuratedQaExerciseDashboardService : ICuratedQaExerciseDashboardServ
             DocumentTitle = document.DocumentTitle,
             FileUrl = document.FileUrl,
             Visibility = document.Visibility.ToString().ToLower(),
+            ProcessingStatus = document.ProcessingStatus.ToString().ToLower(),
+            ProcessingProgress = document.ProcessingProgress,
+            ProcessingMessage = document.ProcessingMessage,
+            ProcessingUpdatedAt = document.ProcessingUpdatedAt,
             CreatedAt = document.CreatedAt,
             OwnerUserId = document.UserId,
             OwnerName = document.User.Name,
             OwnerEmail = document.User.Email,
             Courses = MapCourses(document.Courses, null)
+        };
+    }
+
+    private static AdminDashboardUserItem MapUser(User user)
+    {
+        return new AdminDashboardUserItem
+        {
+            UserId = user.UserId,
+            Username = user.Username,
+            Email = user.Email,
+            Name = user.Name,
+            Role = user.Role.ToString().ToLower(),
+            Cohort = user.Cohort,
+            AccountStatus = user.AccountStatus,
+            MajorId = user.MajorId,
+            MajorName = user.Major?.MajorName,
+            Courses = MapCourses(user.Courses, null)
         };
     }
 

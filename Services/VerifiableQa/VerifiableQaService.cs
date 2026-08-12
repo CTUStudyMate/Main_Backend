@@ -105,6 +105,7 @@ public class VerifiableQaService : IVerifiableQaService
         }
 
         verifiableQa.ApprovedAnswer = approvedAnswer;
+        verifiableQa.ApprovedByUserId = lecturer.UserId;
         verifiableQa.Status = VerifiableQaStatus.Approved;
         var now = DateTime.UtcNow;
         verifiableQa.UpdatedAt = now;

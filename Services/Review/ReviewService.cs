@@ -149,7 +149,7 @@ public class ReviewService
         {
             var curatedQas = await _context.CuratedQas
                 .AsNoTracking()
-                .Where(curatedQa => curatedQa.VerifiableQa.Courses
+                .Where(curatedQa => curatedQa.IsEnabled && curatedQa.VerifiableQa.Courses
                     .Any(course => course.CourseId == request.CourseId))
                 .ToListAsync(cancellationToken);
 

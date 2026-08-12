@@ -103,7 +103,8 @@ public sealed class InternalDocumentsController : ControllerBase
     private async Task<Document?> FindUploadedDocumentAsync(int documentId, CancellationToken cancellationToken) =>
         await _db.Documents.FirstOrDefaultAsync(
             document => document.DocumentId == documentId &&
-                        document.SourceType == DocumentSourceType.User,
+                        (document.SourceType == DocumentSourceType.User ||
+                         document.SourceType == DocumentSourceType.System),
             cancellationToken);
 
     private bool HasValidServiceToken()

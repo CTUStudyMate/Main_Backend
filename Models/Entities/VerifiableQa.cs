@@ -13,6 +13,7 @@ public class VerifiableQa
     public int VerifiableQaId { get; set; }
     public Guid SourceMessageId { get; set; }
     public int? UserId { get; set; }
+    public int? ApprovedByUserId { get; set; }
     public required string OriginalQuestion { get; set; }
     public string? RewrittenQuestion { get; set; }
     public required string GeneratedAnswer { get; set; }
@@ -24,6 +25,7 @@ public class VerifiableQa
 
     public Message SourceMessage { get; set; } = null!;
     public User? User { get; set; }
+    public User? ApprovedByUser { get; set; }
     public ICollection<Course> Courses { get; set; } = new List<Course>();
     public ICollection<CuratedQa> CuratedQas { get; set; } = new List<CuratedQa>();
 }

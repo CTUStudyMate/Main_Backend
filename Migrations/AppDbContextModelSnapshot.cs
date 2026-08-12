@@ -215,6 +215,9 @@ namespace MainBackend.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<bool>("IsEnabled")
+                        .HasColumnType("boolean");
+
                     b.Property<int>("VerifiableQaId")
                         .HasColumnType("integer");
 
@@ -543,6 +546,9 @@ namespace MainBackend.Migrations
                     b.Property<string>("ApprovedAnswer")
                         .HasColumnType("text");
 
+                    b.Property<int?>("ApprovedByUserId")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -584,6 +590,8 @@ namespace MainBackend.Migrations
 
                     b.HasIndex("SourceMessageId")
                         .IsUnique();
+
+                    b.HasIndex("ApprovedByUserId");
 
                     b.HasIndex("UserId");
 
@@ -799,7 +807,14 @@ namespace MainBackend.Migrations
                         .WithMany()
                         .HasForeignKey("UserId");
 
+                    b.HasOne("MainBackend.Models.User", "ApprovedByUser")
+                        .WithMany()
+                        .HasForeignKey("ApprovedByUserId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
                     b.Navigation("SourceMessage");
+
+                    b.Navigation("ApprovedByUser");
 
                     b.Navigation("User");
                 });

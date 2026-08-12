@@ -6,6 +6,7 @@ public class CuratedQa
     public int VerifiableQaId { get; set; }
     public required string CuratedQuestion { get; set; }
     public required string CuratedAnswer { get; set; }
+    public bool IsEnabled { get; set; } = true;
     public DateTime? CreatedAt { get; set; }
 
     public VerifiableQa VerifiableQa { get; set; } = null!;
