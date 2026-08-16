@@ -40,6 +40,42 @@ public class MessageService
 
         if (currentChat.UserId != userId) throw new UnauthorizedAccessException("Chat not owned by user");
 
+        List<int>? validDocumentIds = null;
+        var hasSelectedPersonalDocuments = false;
+        if (request.DocumentIds is not null)
+        {
+            var requestedDocumentIds = request.DocumentIds
+                .Where(documentId => documentId > 0)
+                .Distinct()
+                .ToList();
+
+            var validDocuments = await _context.Documents
+                .AsNoTracking()
+                .Where(document =>
+                    requestedDocumentIds.Contains(document.DocumentId) &&
+                    document.Visibility == DocumentVisibility.Active &&
+                    document.ProcessingStatus == DocumentProcessingStatus.Ready &&
+                    (
+                        document.SourceType == DocumentSourceType.System ||
+                        (
+                            document.SourceType == DocumentSourceType.User &&
+                            document.UserId == userId
+                        )
+                    ))
+                .Select(document => new
+                {
+                    document.DocumentId,
+                    document.SourceType,
+                })
+                .ToListAsync();
+
+            validDocumentIds = validDocuments
+                .Select(document => document.DocumentId)
+                .ToList();
+            hasSelectedPersonalDocuments = validDocuments.Any(document =>
+                document.SourceType == DocumentSourceType.User);
+        }
+
         // create user message
         var now = DateTime.UtcNow;
         var UserMessage = new Message
@@ -58,14 +94,17 @@ public class MessageService
         // check for cache
         var requestMessage = request.Content;
         VerifiableQa? cachedVerifiableQa = null;
-        try
+        if (!hasSelectedPersonalDocuments)
         {
-            cachedVerifiableQa = await FindCachedVerifiableQaAsync(requestMessage);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            cachedVerifiableQa = null;
+            try
+            {
+                cachedVerifiableQa = await FindCachedVerifiableQaAsync(requestMessage);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                cachedVerifiableQa = null;
+            }
         }
 
         if (cachedVerifiableQa is not null)
@@ -109,11 +148,16 @@ public class MessageService
             MessageId = m.MessageId
         }).ToList();
 
-        var payload = new
+        var payload = new Dictionary<string, object?>
         {
-            messages = ragMessages,
-            query = request.Content
+            ["messages"] = ragMessages,
+            ["query"] = request.Content,
         };
+
+        if (validDocumentIds is not null)
+        {
+            payload["document_ids"] = validDocumentIds;
+        }
         var response = await _httpClient.PostAsJsonAsync(
             $"{_ragOptions.BaseUrl}/chat",
             payload

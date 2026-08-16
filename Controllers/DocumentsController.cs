@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using System.Text;
 using MainBackend.Models;
+using MainBackend.Models.DTOs.Documents;
 using MainBackend.Services;
 using MainBackend.Services.RagEngine;
 using Microsoft.AspNetCore.Authorization;
@@ -34,33 +35,31 @@ public sealed class DocumentsController : ControllerBase
     }
 
     [HttpPost("upload")]
+    [Consumes("multipart/form-data")]
     [RequestSizeLimit(MaxUploadSizeBytes)]
     [RequestFormLimits(MultipartBodyLengthLimit = MaxUploadSizeBytes)]
     public async Task<IActionResult> UploadPdf(
-        [FromForm] IFormFile file,
-        [FromForm] string? title,
-        [FromForm] List<int>? courseIds,
+        [FromForm] UploadDocumentRequest request,
         CancellationToken cancellationToken)
         => await UploadPdfForSource(
-            file,
-            title,
-            courseIds,
+            request.File,
+            request.Title,
+            request.CourseIds,
             DocumentSourceType.User,
             cancellationToken);
 
     [HttpPost("system/upload")]
     [Authorize(Roles = "admin")]
+    [Consumes("multipart/form-data")]
     [RequestSizeLimit(MaxUploadSizeBytes)]
     [RequestFormLimits(MultipartBodyLengthLimit = MaxUploadSizeBytes)]
     public async Task<IActionResult> UploadSystemPdf(
-        [FromForm] IFormFile file,
-        [FromForm] string? title,
-        [FromForm] List<int>? courseIds,
+        [FromForm] UploadDocumentRequest request,
         CancellationToken cancellationToken)
         => await UploadPdfForSource(
-            file,
-            title,
-            courseIds,
+            request.File,
+            request.Title,
+            request.CourseIds,
             DocumentSourceType.System,
             cancellationToken);
 
@@ -213,6 +212,74 @@ public sealed class DocumentsController : ControllerBase
             .ToListAsync(cancellationToken);
 
         return Ok(documents.Select(ToDocumentResponse));
+    }
+
+    [HttpGet("courses")]
+    public async Task<IActionResult> GetSystemDocumentCourses(
+        CancellationToken cancellationToken)
+    {
+        var courses = await _db.Documents
+            .AsNoTracking()
+            .Where(document =>
+                document.SourceType == DocumentSourceType.System &&
+                document.Visibility == DocumentVisibility.Active &&
+                document.ProcessingStatus == DocumentProcessingStatus.Ready)
+            .SelectMany(document => document.Courses.Select(course => new
+            {
+                course.CourseId,
+                course.CourseCode,
+                course.CourseName,
+                document.DocumentId,
+            }))
+            .GroupBy(item => new
+            {
+                item.CourseId,
+                item.CourseCode,
+                item.CourseName,
+            })
+            .Select(group => new
+            {
+                group.Key.CourseId,
+                group.Key.CourseCode,
+                group.Key.CourseName,
+                DocumentIds = group
+                    .Select(item => item.DocumentId)
+                    .Distinct()
+                    .OrderBy(documentId => documentId)
+                    .ToList(),
+            })
+            .OrderBy(course => course.CourseCode)
+            .ToListAsync(cancellationToken);
+
+        return Ok(courses);
+    }
+
+    [HttpGet("ready")]
+    public async Task<IActionResult> GetReadyDocuments(
+        CancellationToken cancellationToken)
+    {
+        var userId = GetCurrentUserId();
+        if (userId is null)
+        {
+            return Unauthorized();
+        }
+
+        var documents = await _db.Documents
+            .AsNoTracking()
+            .Where(document =>
+                document.UserId == userId.Value &&
+                document.SourceType == DocumentSourceType.User &&
+                document.Visibility == DocumentVisibility.Active &&
+                document.ProcessingStatus == DocumentProcessingStatus.Ready)
+            .OrderByDescending(document => document.CreatedAt)
+            .Select(document => new
+            {
+                document.DocumentId,
+                document.DocumentTitle,
+            })
+            .ToListAsync(cancellationToken);
+
+        return Ok(documents);
     }
 
     [HttpGet("{documentId:int}/file")]

@@ -11,4 +11,6 @@ public class RespondUserRequest
     public required DateTime CreatedAt { get; set; }
 
     public required Guid ChatId { get; set; }
+
+    public List<int>? DocumentIds { get; set; }
 }
