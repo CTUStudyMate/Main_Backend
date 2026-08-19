@@ -201,7 +201,7 @@ public class MessageService
         currentChat.LastMessageAt = aiMessageCreatedAt;
         await _context.SaveChangesAsync();
 
-        if (result.NeedVerify)
+        if (result.NeedVerify && !hasSelectedPersonalDocuments)
         {
             var documentIds = result.DocumentIds
                 .Select(documentId => int.TryParse(documentId, out var parsedId) ? parsedId : (int?)null)
@@ -215,40 +215,46 @@ public class MessageService
                 .Where(document => documentIds.Contains(document.DocumentId))
                 .ToListAsync();
 
-            var relatedCourses = relatedDocuments
-                .SelectMany(document => document.Courses)
-                .GroupBy(course => course.CourseId)
-                .OrderByDescending(group => group.Count())
-                .Take(3)
-                .Select(group => group.First())
-                .ToList();
+            var hasPersonalDocumentInResponse = relatedDocuments.Any(document =>
+                document.SourceType == DocumentSourceType.User);
 
-            var verifiableQa = new VerifiableQa
+            if (!hasPersonalDocumentInResponse)
             {
-                SourceMessageId = AIMessage.MessageId,
-                UserId = userId,
-                OriginalQuestion = request.Content,
-                RewrittenQuestion = result.RewrittenQuestion,
-                GeneratedAnswer = result.Segments.Count > 0
-                    ? JsonSerializer.Serialize(result.Segments)
-                    : result.Content,
-                Status = VerifiableQaStatus.Pending,
-                ApprovedAnswer = null,
-                Embedding = null,
-                CreatedAt = now,
-                UpdatedAt = now
-            };
+                var relatedCourses = relatedDocuments
+                    .SelectMany(document => document.Courses)
+                    .GroupBy(course => course.CourseId)
+                    .OrderByDescending(group => group.Count())
+                    .Take(3)
+                    .Select(group => group.First())
+                    .ToList();
 
-            foreach (var course in relatedCourses)
-            {
-                verifiableQa.Courses.Add(course);
+                var verifiableQa = new VerifiableQa
+                {
+                    SourceMessageId = AIMessage.MessageId,
+                    UserId = userId,
+                    OriginalQuestion = request.Content,
+                    RewrittenQuestion = result.RewrittenQuestion,
+                    GeneratedAnswer = result.Segments.Count > 0
+                        ? JsonSerializer.Serialize(result.Segments)
+                        : result.Content,
+                    Status = VerifiableQaStatus.Pending,
+                    ApprovedAnswer = null,
+                    Embedding = null,
+                    CreatedAt = now,
+                    UpdatedAt = now
+                };
+
+                foreach (var course in relatedCourses)
+                {
+                    verifiableQa.Courses.Add(course);
+                }
+
+                await _context.VerifiableQas.AddAsync(verifiableQa);
+                await _context.SaveChangesAsync();
+
+                AIMessage.VerifiableQa = verifiableQa;
+                await _context.SaveChangesAsync();
             }
-
-            await _context.VerifiableQas.AddAsync(verifiableQa);
-            await _context.SaveChangesAsync();
-
-            AIMessage.VerifiableQa = verifiableQa;
-            await _context.SaveChangesAsync();
         }
 
         return AIMessage;
@@ -265,7 +271,6 @@ public class MessageService
             cancellationToken);
 
         var queryVector = new Vector(embedding);
-
         var closestQa = await _context.VerifiableQas
             .AsNoTracking()
             .Where(qa =>

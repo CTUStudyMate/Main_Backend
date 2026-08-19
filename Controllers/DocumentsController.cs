@@ -338,12 +338,8 @@ public sealed class DocumentsController : ControllerBase
 
     private IActionResult OpenDocumentFile(Document document)
     {
-        if (string.IsNullOrWhiteSpace(document.StorageKey))
-        {
-            return NotFound(new { message = "The uploaded file is unavailable." });
-        }
-
-        var path = _storage.GetFullPath(document.StorageKey);
+        var storageKey = _storage.CreateStorageKey(document.UserId, document.DocumentId);
+        var path = _storage.GetFullPath(storageKey);
         if (!System.IO.File.Exists(path))
         {
             return NotFound(new { message = "The uploaded file is unavailable." });

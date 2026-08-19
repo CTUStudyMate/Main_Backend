@@ -24,6 +24,8 @@ public class McqQuestionDataToFrontend
     public required string Question { get; set; }
     public McqSelectionMode SelectionMode { get; set; }
     public List<McqChoice> Choices { get; set; } = [];
+    public List<string> CorrectChoiceIds { get; set; } = [];
+    public string? Explanation { get; set; }
 }
 
 public class FillBlankDefinitionToFrontend
@@ -31,6 +33,7 @@ public class FillBlankDefinitionToFrontend
     public required string Id { get; set; }
     public bool CaseSensitive { get; set; }
     public bool TrimWhitespace { get; set; }
+    public List<string> AcceptedAnswers { get; set; } = [];
 }
 
 public class FillBlankQuestionDataToFrontend
@@ -39,6 +42,7 @@ public class FillBlankQuestionDataToFrontend
     public required string Instruction { get; set; }
     public required string Question { get; set; }
     public List<FillBlankDefinitionToFrontend> Blanks { get; set; } = [];
+    public string? Explanation { get; set; }
 }
 
 public class MatchingQuestionDataToFrontend
@@ -48,4 +52,5 @@ public class MatchingQuestionDataToFrontend
     public required string Question { get; set; }
     public List<MatchingItem> LeftItems { get; set; } = [];
     public List<MatchingItem> RightItems { get; set; } = [];
+    public List<MatchingCorrectPair> CorrectPairs { get; set; } = [];
 }

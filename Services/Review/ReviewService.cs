@@ -31,7 +31,8 @@ public class ReviewService
     public async Task<ReviewSessionToFrontend> GetReviewAsync(
         int userId,
         Guid reviewSessionId,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default,
+        bool includeCorrectAnswers = false)
     {
         var reviewSession = await _context.ReviewSessions
             .AsNoTracking()
@@ -64,7 +65,9 @@ public class ReviewService
                     QuestionResponseId = response.QuestionResponseId,
                     StudentAnswer = response.StudentAnswer,
                     IsCorrect = response.IsCorrect,
-                    QuestionItem = MapQuestionItemToFrontend(response.QuestionItem)
+                    QuestionItem = MapQuestionItemToFrontend(
+                        response.QuestionItem,
+                        includeCorrectAnswers)
                 })
                 .ToList()
         };
@@ -153,7 +156,7 @@ public class ReviewService
                     .Any(course => course.CourseId == request.CourseId))
                 .ToListAsync(cancellationToken);
 
-            if (curatedQas.Count > request.QuestionCount)
+            if (request.IsRandom && curatedQas.Count > request.QuestionCount)
             {
                 for (var index = 0; index < request.QuestionCount; index++)
                 {
@@ -168,40 +171,54 @@ public class ReviewService
                     .ToList();
             }
 
-            var selectedQuestionTypes = curatedQas
-                .Select(curatedQa => new
-                {
-                    curatedQa.CuratedQaId,
-                    QuestionType = (QuestionItemType)Random.Shared.Next(3)
-                })
-                .ToList();
-
-            var selectedCuratedQaIds = selectedQuestionTypes
-                .Select(selection => selection.CuratedQaId)
+            var curatedQaIds = curatedQas
+                .Select(curatedQa => curatedQa.CuratedQaId)
                 .ToList();
 
             var questionItems = await _context.QuestionItems
                 .AsNoTracking()
                 .Where(questionItem =>
                     questionItem.IsEnabled &&
-                    selectedCuratedQaIds.Contains(questionItem.CuratedQaId))
+                    curatedQaIds.Contains(questionItem.CuratedQaId))
                 .ToListAsync(cancellationToken);
 
-            var selectedQuestionItems = selectedQuestionTypes
-                .Join(
-                    questionItems,
-                    selection => new
+            List<QuestionItem> selectedQuestionItems;
+
+            if (request.IsRandom)
+            {
+                var selectedQuestionTypes = curatedQas
+                    .Select(curatedQa => new
                     {
-                        selection.CuratedQaId,
-                        selection.QuestionType
-                    },
-                    questionItem => new
-                    {
-                        questionItem.CuratedQaId,
-                        QuestionType = questionItem.Type
-                    },
-                    (_, questionItem) => questionItem)
-                .ToList();
+                        curatedQa.CuratedQaId,
+                        QuestionType = (QuestionItemType)Random.Shared.Next(3)
+                    })
+                    .ToList();
+
+                selectedQuestionItems = selectedQuestionTypes
+                    .Join(
+                        questionItems,
+                        selection => new
+                        {
+                            selection.CuratedQaId,
+                            selection.QuestionType
+                        },
+                        questionItem => new
+                        {
+                            questionItem.CuratedQaId,
+                            QuestionType = questionItem.Type
+                        },
+                        (_, questionItem) => questionItem)
+                    .ToList();
+            }
+            else
+            {
+                selectedQuestionItems =
+                [
+                    .. SelectQuestionItems(questionItems, QuestionItemType.Mcq, request.McqQuestionCount),
+                    .. SelectQuestionItems(questionItems, QuestionItemType.FillBlank, request.FillBlankQuestionCount),
+                    .. SelectQuestionItems(questionItems, QuestionItemType.Matching, request.MatchingQuestionCount)
+                ];
+            }
 
             if (selectedQuestionItems.Count == 0)
             {
@@ -263,12 +280,47 @@ public class ReviewService
         {
             throw;
         }
+        catch (ArgumentException)
+        {
+            throw;
+        }
         catch (Exception exception)
         {
             throw new InvalidOperationException(
                 "Unable to create the review. Please try again later.",
                 exception);
         }
+    }
+
+    private static List<QuestionItem> SelectQuestionItems(
+        IReadOnlyCollection<QuestionItem> questionItems,
+        QuestionItemType questionType,
+        int requestedCount)
+    {
+        if (requestedCount == 0)
+        {
+            return [];
+        }
+
+        var candidates = questionItems
+            .Where(questionItem => questionItem.Type == questionType)
+            .ToList();
+
+        if (candidates.Count < requestedCount)
+        {
+            throw new ArgumentException(
+                $"Only {candidates.Count} enabled {questionType} question(s) are available, " +
+                $"but {requestedCount} were requested.");
+        }
+
+        for (var index = 0; index < requestedCount; index++)
+        {
+            var randomIndex = Random.Shared.Next(index, candidates.Count);
+            (candidates[index], candidates[randomIndex]) =
+                (candidates[randomIndex], candidates[index]);
+        }
+
+        return candidates.Take(requestedCount).ToList();
     }
 
     public async Task PauseReviewAsync(
@@ -609,7 +661,8 @@ public class ReviewService
     }
 
     private static QuestionItemToFrontend MapQuestionItemToFrontend(
-        QuestionItem questionItem)
+        QuestionItem questionItem,
+        bool includeCorrectAnswers = false)
     {
         return new QuestionItemToFrontend
         {
@@ -618,13 +671,16 @@ public class ReviewService
             QuestionData = questionItem.Type switch
             {
                 QuestionItemType.Mcq => MapMcqQuestionData(
-                    DeserializeQuestionData<McqQuestionData>(questionItem)),
+                    DeserializeQuestionData<McqQuestionData>(questionItem),
+                    includeCorrectAnswers),
 
                 QuestionItemType.FillBlank => MapFillBlankQuestionData(
-                    DeserializeQuestionData<FillBlankQuestionData>(questionItem)),
+                    DeserializeQuestionData<FillBlankQuestionData>(questionItem),
+                    includeCorrectAnswers),
 
                 QuestionItemType.Matching => MapMatchingQuestionData(
-                    DeserializeQuestionData<MatchingQuestionData>(questionItem)),
+                    DeserializeQuestionData<MatchingQuestionData>(questionItem),
+                    includeCorrectAnswers),
 
                 _ => throw new InvalidOperationException(
                     $"Unsupported question type: {questionItem.Type}.")
@@ -642,7 +698,8 @@ public class ReviewService
     }
 
     private static McqQuestionDataToFrontend MapMcqQuestionData(
-        McqQuestionData questionData)
+        McqQuestionData questionData,
+        bool includeCorrectAnswers)
     {
         return new McqQuestionDataToFrontend
         {
@@ -650,12 +707,17 @@ public class ReviewService
             Instruction = questionData.Instruction,
             Question = questionData.Question,
             SelectionMode = questionData.SelectionMode,
-            Choices = questionData.Choices
+            Choices = questionData.Choices,
+            CorrectChoiceIds = includeCorrectAnswers
+                ? questionData.CorrectChoiceIds
+                : [],
+            Explanation = includeCorrectAnswers ? questionData.Explanation : null
         };
     }
 
     private static FillBlankQuestionDataToFrontend MapFillBlankQuestionData(
-        FillBlankQuestionData questionData)
+        FillBlankQuestionData questionData,
+        bool includeCorrectAnswers)
     {
         return new FillBlankQuestionDataToFrontend
         {
@@ -667,14 +729,19 @@ public class ReviewService
                 {
                     Id = blank.Id,
                     CaseSensitive = blank.CaseSensitive,
-                    TrimWhitespace = blank.TrimWhitespace
+                    TrimWhitespace = blank.TrimWhitespace,
+                    AcceptedAnswers = includeCorrectAnswers
+                        ? blank.AcceptedAnswers
+                        : []
                 })
-                .ToList()
+                .ToList(),
+            Explanation = includeCorrectAnswers ? questionData.Explanation : null
         };
     }
 
     private static MatchingQuestionDataToFrontend MapMatchingQuestionData(
-        MatchingQuestionData questionData)
+        MatchingQuestionData questionData,
+        bool includeCorrectAnswers)
     {
         return new MatchingQuestionDataToFrontend
         {
@@ -682,7 +749,8 @@ public class ReviewService
             Instruction = questionData.Instruction,
             Question = questionData.Question,
             LeftItems = questionData.LeftItems,
-            RightItems = questionData.RightItems
+            RightItems = questionData.RightItems,
+            CorrectPairs = includeCorrectAnswers ? questionData.CorrectPairs : []
         };
     }
 }

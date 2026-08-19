@@ -93,7 +93,8 @@ public class ReviewDashboardController : ControllerBase
         var review = await _reviewService.GetReviewAsync(
             userId,
             reviewSessionId,
-            cancellationToken);
+            cancellationToken,
+            includeCorrectAnswers: true);
 
         if (!review.IsCompleted)
         {
